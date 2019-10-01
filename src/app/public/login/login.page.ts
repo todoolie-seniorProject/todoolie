@@ -13,7 +13,9 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
   login() {
-    let isAthorized = this.authService.login(this.username, this.password);
-    console.log(isAthorized);
+     let isAthorized = this.authService.login(this.username, this.password);
+     console.log(isAthorized);
+
+
   }
 }
