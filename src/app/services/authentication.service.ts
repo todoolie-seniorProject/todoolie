@@ -20,12 +20,13 @@ export class AuthenticationService {
       }
     });
   }
-  login(username: string, password: string) {
-    return this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
-      this.authenticationState.next(true);
-      let isAthorized = this.authenticationState.getValue();
-      console.log(isAthorized);
-    });
+  login() {
+
+    // return this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
+    //   this.authenticationState.next(true);
+    //   let isAthorized = this.authenticationState.getValue();
+    //   console.log(isAthorized);
+    // });
   }
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {

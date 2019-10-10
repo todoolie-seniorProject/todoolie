@@ -23,4 +23,10 @@ const routes: Routes = [
   ],
   declarations: [LoginPage]
 })
+<<<<<<< Updated upstream
 export class LoginPageModule {}
+=======
+export class LoginPageModule {
+
+}
+>>>>>>> Stashed changes
