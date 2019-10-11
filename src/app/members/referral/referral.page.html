@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>referral</ion-title>
+    <ion-button routerLink = "/referral">
+
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form [formGroup] = "referral" (ngSubmit) = "referralForm()">
+  <ion-item>
+    <ion-label>Name : </ion-label>
+    <ion-input type = "text" formControlName = "name"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label>Email : </ion-label>
+      <ion-input type = "text" formControlName = "email" ngModel [email] = "true"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Age : </ion-label>
+        <ion-input type = "number" formControlName = "age"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>school : </ion-label>
+          <ion-input type = "text" formControlName = "school"></ion-input>
+        </ion-item>
+        <ion-button type = "refer" color = "sucess" expand = "block" disable = "!referral.vaild">refer</ion-button>
+</form>
+</ion-content>
