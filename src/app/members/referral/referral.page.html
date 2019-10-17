@@ -1,9 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>referral</ion-title>
-    <ion-button routerLink = "/referral">
-
-    </ion-button>
+    <ion-title padding center text-center>Referral</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,6 +22,6 @@
           <ion-label>school : </ion-label>
           <ion-input type = "text" formControlName = "school"></ion-input>
         </ion-item>
-        <ion-button type = "refer" color = "sucess" expand = "block" disable = "!referral.vaild">refer</ion-button>
+        <ion-button (click) = 'login()' expand = "block">refer-a-friend</ion-button>
 </form>
 </ion-content>
