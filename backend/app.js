@@ -5,16 +5,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 
+const bodyParser = require('body-parser');
+const corsOptions = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT,DELETE",
+  "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+ }
 
 
 var app = express();
-
-
-
-
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
