@@ -21,12 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
 })
-<<<<<<< Updated upstream
 export class LoginPageModule {}
-=======
-export class LoginPageModule {
-
-}
->>>>>>> Stashed changes

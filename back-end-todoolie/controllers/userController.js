@@ -14,7 +14,7 @@ exports.check_login_creds = function(req, res) {
 
      if(!req.body.username|| !req.body.pass){
   
-              res.status(400).send({ error:true, message: "enter username and pass" });
+              res.status(400).send({success: false, error:true, message: "enter username and pass" });
   
           }
   else{
@@ -24,10 +24,11 @@ exports.check_login_creds = function(req, res) {
         res.send(err);
       else
         if(task.length > 0) {
-            res.send("success");
+          console.log("login successful");
+        res.send({success: true, error :false, message : 'logged in successful',user: req.body.username});
         }
         else {
-            res.send("wrong username/pass");
+          res.status(210).send({success: false, error: true, message: "wrong username or password"});
         }
     });
 }

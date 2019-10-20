@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.route('/').get(controller.list_all_users);
-router.route('/login').post(controller.check_login_creds);
+router.route('../src/app/public/login/login').post(controller.check_login_creds);
 
 
 module.exports = router;

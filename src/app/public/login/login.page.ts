@@ -1,6 +1,7 @@
 import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
-import {LoginUser} from './login.model';
+import { AlertController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,9 @@ export class LoginPage implements OnInit {
   // variable student user declaration
   username: string;
   password: string;
+  result: any = [];
+  data: any;
+
   // pulled from login.model.ts to utilize an interface
   // login: LoginUser[] = [ {
     // username: '',
@@ -18,37 +22,30 @@ export class LoginPage implements OnInit {
   // }
   // ];
 
-  constructor(private authService: AuthenticationService) {
+
+  constructor(private authService: AuthenticationService, public alertController: AlertController, private http: HttpClient) {
 
    }
   ngOnInit() {
   }
-<<<<<<< Updated upstream
-  login() {
-    let isAthorized = this.authService.login(this.username, this.password);
-    console.log(isAthorized);
-=======
   // ** I used this function to go to the dashboard page if credentials were input and
   // login button was pressed!
+
   // login() {
   //    let isAthorized = this.authService.login(this.username, this.password);
   //    console.log(isAthorized);
 
+  login(username, password) {
+      if ((this.username && this.password) === '' ) {
+        // console.log(this.username);
+        // console.log(this.password);
+        let isAthorized = this.authService.login(this.username, this.password);
+        // this.authService.login(this.username, this.password);
+        console.log(isAthorized);
+        // this.authService.postCreds(this.username, this.password);
+      } else {
+        this.authService.presentAlert();
+        }
+    }
 
-
-
-  // login() {
-  //     // checks if username or password should be at least 8 chars long, contain
-  //     // one number, one char, annd one special char
-  //     const regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-
-  //     if (regExp.test( this.username && this.password) === true) {
-  //       console.log(this.username);
-  //       console.log(this.password);
-  //       this.authService.login();
-
-  // }
-
-
->>>>>>> Stashed changes
-  }
+}

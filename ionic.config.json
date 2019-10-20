@@ -1,5 +1,7 @@
 {
   "name": "TodooliePrototype1",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
