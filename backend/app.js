@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
  var originsWhitelist = [
-  'http://localhost:4200'
+  'http://localhost:4200' //allowing requests from this website, which is our front-end
  
 ];
 var corsOptions = {

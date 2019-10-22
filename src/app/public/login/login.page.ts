@@ -41,9 +41,9 @@ export class LoginPage implements OnInit {
 
 async login() {
   this.authService.login(this.username, this.password).subscribe(res => {
-    this.showAlert(res);
+    this.showAlert(res); //show in alert message box whetever result comes
 }, err => {
-  this.showAlert(err.error.text);
+  this.showAlert(err.error.text); 
 });
 }
 

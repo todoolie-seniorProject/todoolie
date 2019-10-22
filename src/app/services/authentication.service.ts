@@ -37,7 +37,7 @@ export class AuthenticationService {
   }
   login(username: string, password: string): any {
     
-   let user = {"username": username, "pass": password}
+   let user = {"username": username, "pass": password} // changed field_name "password" to "pass" because our API accepts "pass"
    return this.http.post(SERVER_URL+'/login', user);
   }
   logout() {
