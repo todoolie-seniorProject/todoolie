@@ -1,6 +1,6 @@
 import { Platform, Config } from '@ionic/angular';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -36,11 +36,9 @@ export class AuthenticationService {
    });
   }
   login(username: string, password: string): any {
-   let user = {username: username, password: password}
-   return this.http.post(SERVER_URL+'/login',user, {
-     observe: 'response',
-     responseType: 'json'
-   });
+    
+   let user = {"username": username, "pass": password}
+   return this.http.post(SERVER_URL+'/login', user);
   }
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {

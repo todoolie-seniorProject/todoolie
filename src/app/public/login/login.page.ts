@@ -41,15 +41,9 @@ export class LoginPage implements OnInit {
 
 async login() {
   this.authService.login(this.username, this.password).subscribe(res => {
-   if(res.status==200){
-     this.showAlert("successful")
-     this.authService.setToken()
-   } 
-   else if (res.status==210){
-     this.showAlert('error')
-   }
+    this.showAlert(res);
 }, err => {
-  throw err;
+  this.showAlert(err.error.text);
 });
 }
 
@@ -71,22 +65,13 @@ async login() {
 
 // }
 
- async showAlert(type){
-  if(type == 'error'){
+ async showAlert(msg){
     const alert = await this.alertCtrl.create({
-      header: 'Error',
-      message: 'username and password did not match',
+      header: 'Server Message',
+      message: msg,
       buttons: ['OK']
     });
     await alert.present();
-  }
-  else if (type == 'success'){
-    const alert = await this.alertCtrl.create({
-      header: 'success',
-      message: 'logged in successfully',
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
+
 }
 }
