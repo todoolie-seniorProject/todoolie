@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { ToastController } from '@ionic/angular';
+import {NavController, AlertController, ToastController } from '@ionic/angular';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { Storage } from '@ionic/storage';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-referral',
@@ -11,8 +15,15 @@ import { ToastController } from '@ionic/angular';
 export class ReferralPage implements OnInit {
 private referral : FormGroup;
 private showData;
+public name: string;
+public email: string;
+public age: number;
+public school: string;
 
-  constructor(private authService: AuthenticationService, private fb: FormBuilder, public toastController: ToastController) {
+  constructor(private authService: AuthenticationService,
+     private fb: FormBuilder,
+      public toastController: ToastController,
+      public alertCtrl: AlertController) {
     this.referral=fb.group({
       name: ["", Validators.required],
       email: ["", Validators.required],
@@ -48,5 +59,20 @@ clearReferral(){
   logout(){
     this.authService.logout();
   }
+  async refer() {
+    this.authService.refer(this.name, this.age, this.school, this.school).subscribe(res => {
+      this.showAlert(res);
+  }, err => {
+    this.showAlert(err.error.text);
+  });
+  }
+  async showAlert(msg){
+    const alert = await this.alertCtrl.create({
+      header: 'Server Message',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
 
+}
 }

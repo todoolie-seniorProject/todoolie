@@ -40,6 +40,10 @@ export class AuthenticationService {
    let user = {"username": username, "pass": password}
    return this.http.post(SERVER_URL+'/login', user);
   }
+  refer( name: string, age: number, school: string, email : string): any{
+  let user ={ "name" : name, "age": age, "email": email, "school": school}
+  return this.http.post(SERVER_URL+'/referral', user);
+  }
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
