@@ -12,4 +12,9 @@ router.route('/referral').post(referralController.create_new_referral); //post r
 
 
 
+router.route('/referral/:id').patch(referralController.edit_referral); //edit the referral (change its status)
+router.route('/referral/:id').delete(referralController.delete_referral); //delete referral at :id
+
+
+
 module.exports = router;

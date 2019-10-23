@@ -27,3 +27,42 @@ exports.create_new_referral = function(req, res) { // controller function which 
    });
 }
 };
+
+
+
+//edit referral function
+exports.edit_referral = function(req, res) { 
+  //checks if user has passed id in params and status in body, if not then give error since we need it to update
+  if(!req.params.id || !req.body.status){ 
+
+           res.status(400).send({ error:true, message: "please enter valid referral id and status to update" });
+
+       }
+else{
+ //call function in model, passing it req which has both status and id which is need to update the referral
+ Task.putReferral(req, function(err, task) { 
+   if (err)
+     res.send(err); 
+   else
+      res.send(task); 
+ });
+}
+};
+
+exports.delete_referral = function(req, res) { 
+  //checks if there is id present of the referral, if not then give error
+  if(!req.params.id){ 
+
+           res.status(400).send({ error:true, message: "please enter valid referral id to delete" });
+
+       }
+else{
+ //call the function of deleting referral in model, passing it req object so it gets all parameters (id)
+ Task.deleteReferral(req, function(err, task) { 
+   if (err)
+     res.send(err); 
+   else
+      res.send(task); 
+ });
+}
+};
