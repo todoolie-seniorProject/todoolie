@@ -12,7 +12,7 @@ exports.list_all_users = function(req, res) {
 
 exports.check_login_creds = function(req, res) {
 
-     if(!req.body.username|| !req.body.pass){
+     if(!req.body.username || !req.body.pass){
   
               res.status(400).send({ error:true, message: "enter username and pass" });
   
@@ -24,10 +24,16 @@ exports.check_login_creds = function(req, res) {
         res.send(err);
       else
         if(task.length > 0) {
-            res.send("success");
+  
+            // if(res.send(true)){
+            //     res.send("Login Successful!");
+            // }
+            res.send(true);
+
+            // res.send('success');
         }
         else {
-            res.send("wrong username/pass");
+            res.send(false);
         }
     });
 }

@@ -9,8 +9,8 @@ var Task = function(task){
     this.created_at = new Date();
 };
 
-Task.getAllReferrals = function (result) {
-    sql.query("SELECT * from Referrals", function (err, res) { //select all data from referrals table and return to controller
+Task.getAllreferrals = function (result) {
+    sql.query("SELECT * from Referral", function (err, res) {
 
             if(err) {
                 console.log("error: ", err);
@@ -18,15 +18,14 @@ Task.getAllReferrals = function (result) {
             }
             else{
                 console.log('tasks : ', res);  
-                result(null, res); // send result to controller
+                result(null, res);
             }
         });   
 };
-
 Task.createReferral = function (body, result) {    // model function which will actually insert ddata in referral table
     //the below is the query to insert data, it takes from user the username and rollnum and set status 0 as in start
     //the status of the referral will be 0, it will later be changed on verification
-    sql.query("INSERT INTO Referrals (Username, Rollnum, Status) values (?,?,0)", [body.username, body.rollnum], function (err, res) {
+    sql.query("INSERT INTO Referral (Refername, Age, Email, School) values (?,?,?,?)", [body.name, body.age, body.email, body.school ], function (err, res) {
             
             if(err) {
                 console.log("error: ", err); // iff error occurs, show
@@ -38,5 +37,3 @@ Task.createReferral = function (body, result) {    // model function which will 
             }
         });           
 };
-
-module.exports= Task;

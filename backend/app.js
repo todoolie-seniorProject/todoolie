@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 const bodyParser = require('body-parser');
 
 
+const port = 3000
 var app = express();
 
 // view engine setup
@@ -16,7 +17,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
  var originsWhitelist = [
-  'http://localhost:4200'
+  'http://localhost:4200' //allowing requests from this website, which is our front-end
  
 ];
 var corsOptions = {
@@ -54,4 +55,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+app.listen(port, () => console.log(`Listening on port... ${port}!`))
 module.exports = app;

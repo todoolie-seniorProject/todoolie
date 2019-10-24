@@ -1,10 +1,10 @@
 const mysql = require('mysql'); //defining mysql library, here we defined mysql library
 
 const db= mysql.createConnection({ // create this database on ur localhost
-    host: 'localhost', // we typed this syntax to connect to our mysql database
-    user:'root', // this is the username of connection
-    password: '12345', //password for connection
-    databse: 'todoolie_db' //the name of database with which we will be communicating
+  host: 'localhost', // we typed this syntax to connect to our mysql database
+  user:'root', // this is the username of connection
+  password: 'password', //password for connection
+  database: 'todoolie_db' //the name of database with which we will be communicating
   });
 
 //Attempting to connect with database given our current credentials for database
@@ -13,7 +13,7 @@ db.connect((err) => { // here we attempt to connect with db, "db" variable has s
     throw err; // if error occurs during trying to connect, it will be shown on console
   }
   //if doesnt throw error, means connected to the databse
-  console.log("Fariha db connected"); // so this means no error, so we print a message to show we are connected
+  console.log("Randy's db connected"); // so this means no error, so we print a message to show we are connected
   db.query("use todoolie_db"); // we type this to use the database todoolie_db
 });
 

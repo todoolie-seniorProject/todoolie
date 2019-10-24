@@ -7,9 +7,8 @@ var router = express.Router();
 router.route('/').get(controller.list_all_users); //list all users in database
 router.route('/login').post(controller.check_login_creds); // check username/pass with database
 
-router.route('/referrals').get(referralController.list_all_referrals); //get req to get all referrals
-router.route('/referral').post(referralController.create_new_referral); //post req to add new referal
-
+router.route('/referral').get(referralController.ListAllreferrals); //get req to get all referrals
+router.route('/referral').post(referralController.createNewReferrals); //post req to add new referal
 
 
 module.exports = router;

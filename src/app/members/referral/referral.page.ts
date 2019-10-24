@@ -21,46 +21,18 @@ public age: number;
 public school: string;
 
   constructor(private authService: AuthenticationService,
-     private fb: FormBuilder,
       public toastController: ToastController,
       public alertCtrl: AlertController) {
-    this.referral=fb.group({
-      name: ["", Validators.required],
-      email: ["", Validators.required],
-      age: ["", Validators.required],
-      school: ["",Validators.required]
-    });
-    this.showData = {
-      name:"",
-      email:"",
-      age:"",
-      school:""
-    }
+   
    }
-async referralForm()
-{
-  this.showData= this.referral.value
-  const toast = await this.toastController.create({
-    message: 'your profile has been updated.',
-    duration:4000
-  });
-}
-clearReferral(){
-  this.referral.reset()
-  this.showData= {
-    name: '',
-    email: '',
-    age: '',
-    school: ''
-  }
-}
   ngOnInit() {
+    
   }
-  logout(){
-    this.authService.logout();
-  }
+  // referout(){
+  //   this.authService.referout();
+  // }
   async refer() {
-    this.authService.refer(this.name, this.age, this.school, this.school).subscribe(res => {
+    this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
       this.showAlert(res);
   }, err => {
     this.showAlert(err.error.text);

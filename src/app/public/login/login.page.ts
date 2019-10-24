@@ -15,55 +15,31 @@ export class LoginPage implements OnInit {
   authenticationState = new BehaviorSubject(false);
   public username: string;
   public password: string;
-  
+
   constructor(private authService: AuthenticationService,
     private storage: Storage,
     private http: HttpClient,
     private nav: NavController,
     public toastController: ToastController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public NavController: NavController
     ) { }
   ngOnInit() {
   }
-//   async login() {
-//     this.authService.login(this.username, this.password).subscribe(res => {
-//      if(res.status==200){
-//        this.showAlert("successful")
-//        this.authService.setToken()
-//      } 
-//      else if (res.status==210){
-//        this.showAlert('error')
-//      }
-//   }, err => {
-//     throw err;
-//   });
-// }
+
 
 async login() {
   this.authService.login(this.username, this.password).subscribe(res => {
-    this.showAlert(res);
+    // randy
+    if (res  == true){
+      // this.showAlert(res); //show in alert message box whetever result comes
+      this.NavController.navigateForward('/referral');
+    }
 }, err => {
+  //shows alert that the username and password is incorrect
   this.showAlert(err.error.text);
 });
 }
-
-
-
-
-// login(username, password) {
-//   if ((this.username && this.password) === '' ) {
-//     // console.log(this.username);
-//     // console.log(this.password);
-//     let isAthorized = this.authService.login(this.username, this.password);
-//     // this.authService.login(this.username, this.password);
-//     console.log(isAthorized);
-//     // this.authService.postCreds(this.username, this.password);
-//   } else {
-//     this.authService.presentAlert();
-//     }
-// }
-
-// }
 
  async showAlert(msg){
     const alert = await this.alertCtrl.create({
