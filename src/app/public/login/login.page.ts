@@ -35,6 +35,10 @@ async login() {
       // this.showAlert(res); //show in alert message box whetever result comes
       this.NavController.navigateForward('/referral');
     }
+    else 
+    {
+      this.showAlert(res);
+    }
 }, err => {
   //shows alert that the username and password is incorrect
   this.showAlert(err.error.text);

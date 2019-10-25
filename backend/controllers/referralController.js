@@ -11,7 +11,7 @@ exports.ListAllreferrals = function(req, res){
 };
 exports.createNewReferrals = function(req, res) {
 
-  if(req.body.refername){
+  if(req.body.referfriend){
     console.log("referral is empty");
            res.status(400).send({ error:true, message: "message me" });
 

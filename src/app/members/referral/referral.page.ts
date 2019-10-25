@@ -38,7 +38,7 @@ public school: string;
     this.showAlert(err.error.text);
   });
   }
-  async showAlert(msg){
+  async showAlert(msg) {
     const alert = await this.alertCtrl.create({
       header: 'Server Message',
       message: msg,
