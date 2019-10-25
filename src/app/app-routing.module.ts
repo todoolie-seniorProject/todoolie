@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', loadChildren: './public/login/login.module#LoginPageModule' },
   { path: 'dashboard', loadChildren: './members/dashboard/dashboard.module#DashboardPageModule' },
+  { path: 'referral', loadChildren: './members/referral/referral.module#ReferralPageModule' }, //randy added line
   {
     path: 'members',
     loadChildren: './members/member-routing.module#MemberRoutingModule'

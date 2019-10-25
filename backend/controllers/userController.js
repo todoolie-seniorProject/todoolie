@@ -24,10 +24,10 @@ exports.check_login_creds = function(req, res) {
         res.send(err);
       else
         if(task.length > 0) {
-            res.send("success");
+            res.send(true); //changed code  
         }
         else {
-            res.send("wrong username/pass");
+            res.send(false); //changed code 
         }
     });
 }

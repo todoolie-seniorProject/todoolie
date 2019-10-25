@@ -21,7 +21,8 @@ export class LoginPage implements OnInit {
     private http: HttpClient,
     private nav: NavController,
     public toastController: ToastController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public NavContoller: NavController
     ) { }
   ngOnInit() {
   }
@@ -41,9 +42,17 @@ export class LoginPage implements OnInit {
 
 async login() {
   this.authService.login(this.username, this.password).subscribe(res => {
-    this.showAlert(res); //show in alert message box whetever result comes
+    // randy
+    if (res==true){
+      // this.showAlert(res); //show in alert message box whetever result comes
+      this.NavContoller.navigateForward('/referral');
+    }
+     else {
+      this.showAlert(res);//fariha
+    }
+    
 }, err => {
-  this.showAlert(err.error.text); 
+  this.showAlert(err.error.text);
 });
 }
 
