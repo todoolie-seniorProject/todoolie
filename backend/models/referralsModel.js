@@ -27,14 +27,14 @@ Task.createReferral = function (body, result) {    // model function which will 
     //the below is the query to insert data, it takes from user the username and rollnum and set status 0 as in start
     //the status of the referral will be 0, it will later be changed on verification
 
-    sql.query("select * from Referrals where Rollnum = ?", body.rollnum, function(err, res) {
+    sql.query("select * from Referrals where Email = ?", body.email, function(err, res) {
         if(err) {
             console.log("error: ", err); // iff error occurs, show
             result(err, null);
         }
         else{
             if(res.length == 0) {
-                sql.query("INSERT INTO Referrals (Username, Rollnum, Status) values (?,?,0)", [body.username, body.rollnum], function (err, res) {
+                sql.query("INSERT INTO Referrals (Username, Email, Status) values (?,?,0)", [body.username, body.email], function (err, res) {
             
                     if(err) {
                         console.log("error: ", err); // iff error occurs, show

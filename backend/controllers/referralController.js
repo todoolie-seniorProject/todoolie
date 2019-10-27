@@ -12,9 +12,9 @@ exports.list_all_referrals = function(req, res) { // controller function which w
 
 exports.create_new_referral = function(req, res) { // controller function which will call model function to create new referral
 
-    if(!req.body.username || !req.body.rollnum){ // check if username and rollnum are provided, otherwise give error
+    if(!req.body.username || !req.body.email){ // check if username and email are provided, otherwise give error
  
-             res.status(400).send({ error:true, message: "enter username and rollnum" }); //err msg in case username/rollnum missing
+             res.status(400).send({ error:true, message: "enter username and email" }); //err msg in case username/rollnum missing
  
          }
  else{
