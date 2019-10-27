@@ -27,29 +27,59 @@ Task.createReferral = function (body, result) {    // model function which will 
     //the below is the query to insert data, it takes from user the username and rollnum and set status 0 as in start
     //the status of the referral will be 0, it will later be changed on verification
 
-    sql.query("select * from Referrals where Email = ?", body.email, function(err, res) {
+    var userValid = 0, emailValid = 0;
+    sql.query("select * from Users where Username = ?", body.username, function(err, res) {
         if(err) {
             console.log("error: ", err); // iff error occurs, show
-            result(err, null);
+            result(err, null); 
         }
-        else{
-            if(res.length == 0) {
-                sql.query("INSERT INTO Referrals (Username, Email, Status) values (?,?,0)", [body.username, body.email], function (err, res) {
-            
-                    if(err) {
-                        console.log("error: ", err); // iff error occurs, show
-                        result(err, null);
-                    }
-                    else{
-                        console.log(res);
-                        result(null, res); //if no error occurs, show res which means response
-                    }
-                });     
+        else {
+            if(res.length > 0) {
+                userValid = 1;
             }
-            else {
-                console.log("referral already exist for this student");
-                result(null, "referral already exist for this student");
+        }
+    });
+
+    sql.query("select * from Students where Email = ?", body.email, function(err, res) {
+        if(err) {
+            console.log("error: ", err); // iff error occurs, show
+            result(err, null); 
+        }
+        else {
+            if(res.length > 0) {
+                emailValid = 1;
             }
+        }
+    });
+
+    sql.query("select * from Referrals where Email = ?", body.email, function(err, res) {
+        if(userValid == 1 && emailValid == 1) {
+            if(err) {
+                console.log("error: ", err); // iff error occurs, show
+                result(err, null);
+            }
+            else{
+                if(res.length == 0) {
+                    sql.query("INSERT INTO Referrals (Username, Email, Status) values (?,?,0)", [body.username, body.email], function (err, res) {
+                
+                        if(err) {
+                            console.log("error: ", err); // iff error occurs, show
+                            result(err, null);
+                        }
+                        else{
+                            console.log(res);
+                            result(null, res); //if no error occurs, show res which means response
+                        }
+                    });     
+                }
+                else {
+                    console.log("referral already exist for this student");
+                    result(null, "referral already exist for this student");
+                }
+            }
+        }
+        else {
+            result(null, "User or Student with that Username or Email does not exist!");
         }
     })
 
