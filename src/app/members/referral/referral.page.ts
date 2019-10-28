@@ -28,20 +28,20 @@ public school: string;
   ngOnInit() {
     
   }
-  // referout(){
-  //   this.authService.referout();
-  // }
+  referout(){
+    this.authService.referout();
+  }
   async refer() {
-    this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
+    this.authService.refer(this.name, this.email,this.age, this.school).subscribe(res => {
       this.showAlert(res);
   }, err => {
     this.showAlert(err.error.text);
   });
   }
-  async showAlert(msg) {
+  async showAlert(msg){
     const alert = await this.alertCtrl.create({
       header: 'Server Message',
-      message: msg,
+      message: "succesfull referrral",
       buttons: ['OK']
     });
     await alert.present();

@@ -4,7 +4,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class = "page2">
+    <div class="spacer" style="height:100px;"></div>
+
+    <h1 id="page-heading1" style=" color: #f26522; text-align:center;">
+      Welcome to ToDoolie!
+    </h1>
+  
 <ion-list> 
  <ion-item>
     <ion-label>Name : </ion-label>
@@ -12,7 +18,7 @@
   </ion-item>
   <ion-item>
       <ion-label>Email : </ion-label>
-      <ion-input type = "text" require placeholder = "email" [(ngModel)]="email"></ion-input>
+      <ion-input type = "email" require placeholder = "email" [(ngModel)]="email"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label>Age : </ion-label>
