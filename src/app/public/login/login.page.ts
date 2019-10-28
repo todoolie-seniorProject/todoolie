@@ -64,7 +64,7 @@ async login() {
     // randy
     if (res  == true){
       // this.showAlert(res); //show in alert message box whetever result comes
-      this.nav.navigateForward('/dashboard');
+      this.showSuccess(res);
     }
 }, err => {
   {
@@ -91,11 +91,24 @@ async login() {
 // }
 
 // }
-
+async showSuccess(msg){
+  const alert = await this.alertCtrl.create({
+    header: 'Successful Login!',
+    message: '',
+    buttons: [ {
+      text: 'OK',
+    handler: () => {
+      this.nav.navigateForward('/dashboard');
+    }
+  }
+]
+  });
+  await alert.present();
+}
  async showAlert(msg){
     const alert = await this.alertCtrl.create({
-      header: 'Server Message',
-      message: 'You have entered wrong username or password',
+      header: 'Error!',
+      message: 'Wrong username or password.',
       buttons: ['OK']
     });
     await alert.present();

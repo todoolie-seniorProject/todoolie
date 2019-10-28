@@ -38,15 +38,13 @@ public school: string;
 
   async refer() {
     this.authService.refer(this.name, this.email,this.age, this.school).subscribe(res => {
-     if(res.name == '', res.age == null){
-      this.nav.navigateForward('/dashboard');
-
-     }
-  }, err => {
-    this.showAlert(err.error.text);
-    this.nav.navigateRoot('/referral');
-
-  });
+       
+     this.showAlertSuccess(res);
+        this.nav.navigateForward('/admin');
+  
+    }, err => {
+      
+    });
   }
   async showAlert(msg){
     const alert = await this.alertCtrl.create({
@@ -56,6 +54,13 @@ public school: string;
     });
     await alert.present();
 
+}
+async showAlertSuccess(msg){
+  const alert = await this.alertCtrl.create({
+    header: 'Successfull Referrral!',
+    buttons: ['OK']
+  });
+  await alert.present();
 }
 clear(){
   this.name='';

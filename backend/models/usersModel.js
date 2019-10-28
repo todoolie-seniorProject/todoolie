@@ -30,7 +30,7 @@ Task.checkUser = function (body, result) {
             }
             else{
                 
-                console.log(res,'bitch');
+                console.log(res);
                 result(null, res);
             }
         });           

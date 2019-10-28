@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment, SERVER_URL } from '../../environments/environment';
-import {AlertController} from '@ionic/angular';
+import {NavController, AlertController} from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 const TOKEN_KEY = 'auth-token';
@@ -18,6 +18,7 @@ export class AuthenticationService {
      private plt: Platform,
       private http: HttpClient,
       public alertController: AlertController,
+      private nav: NavController
       ) {
     this.plt.ready().then(() => {
       this.checkToken();
@@ -45,10 +46,15 @@ export class AuthenticationService {
   }
 // post request for the referral page.
   refer( name: string, email : string, age: number, school : string): any{
+    if(name == undefined || email == null || school == null){
+      this.blankReferral();
+      this.nav.navigateRoot('referral');
+    }
+    else {
   let user ={ "name" : name, "age": age, "email": email, "school": school}
   console.log(user);
   return this.http.post(SERVER_URL+'/referral', user);
-  }
+  }}
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
@@ -73,6 +79,14 @@ export class AuthenticationService {
       header: 'Login Failed!',
       message: 'Incorrect Username/Password, Please Try Again!',
       buttons: ['OK']
+    });
+    await alert.present();
+  }
+  async blankReferral(){
+    const alert = await this.alertController.create({
+      header: 'Empty data',
+      message: 'Input information if you want to make referral',
+      buttons:['ok']
     });
     await alert.present();
   }

@@ -11,20 +11,21 @@ exports.ListAllreferrals = function(req, res){// funcition calling referral mode
 };
 exports.createNewReferrals = function(req, res) {
 
-  if(req.body.refername == ''|| req.body.email == ''|| req.body.age == null || req.body.school == ''){ //checks if user name is empty, doesnt allow the post request.
-    console.log("referral is empty");
-           res.status(400).send({ error:true, message: "message me" });
+  if(req.body.refername){ //checks if user name is empty, doesnt allow the post request.
+    console.log("referral is empty",res.body,res.refername,res.age,res.email,res.school);
+           res.status(400).send({ error:false, message: "message me" });
 
        }
   else{
     Task.createReferral(req.body, function(err,Task){// calls the referral model function if name is not empty.
       if(err)
       res.send(err);
-      else if (task.refername== '' || task.email == ''){
-        res.send('bad referHHHal');
+      else if (task.refername){
+        res.send('Successfull Referral!');
       }
       else {
-        res.send("bad referRral ");
+        console.log('baaadh')
+        res.send(req.body == true);
       }
     });
   }
