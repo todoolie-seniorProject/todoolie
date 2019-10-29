@@ -1,21 +1,35 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
-    <ion-title padding center text-center>ToDoolie</ion-title>
+    <ion-title padding center text-center>Student Ambassador Program</ion-title>
   </ion-toolbar>
 </ion-header>
- 
-<ion-content padding center>
-  <div class="ion-padding">
-    <ion-title padding center text-center>Student Ambassador Login</ion-title>
+  -->
+  <ion-content class="page1">
+
+    <div class="spacer" style="height:100px;"></div>
+
+  <h1 id="page-heading1" style=" color: #f26522; text-align:center;">
+    Welcome to ToDoolie!
+  </h1>
+
+
+  <div id="page-markdown2" style="text-align:center;" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      What&#39;s your ToDo?
+    </p>
+  </div>
+
+
     <ion-list>
     <ion-item>
-  <ion-input type="text" required placeholder="Username" [(ngModel)]="username" ></ion-input>
+  <ion-input type="text" pattern="^[a-zA-Z\s']+$" required placeholder="Username" [(ngModel)]="username" ></ion-input>
   </ion-item>
   <ion-item>
       <ion-input type="password" required placeholder="Password" [(ngModel)]="password" ></ion-input>
-  
   </ion-item>
   </ion-list>
-  <ion-button (click)='login()' expand="block">Login</ion-button>
+
+  <div class="btn-wrapper">
+  <ion-button id="page-button1" (click)='login()' color="primary" expand="block">Login</ion-button>
 </div>
 </ion-content>

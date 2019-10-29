@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-referral',
@@ -13,7 +14,7 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./referral.page.scss'],
 })
 export class ReferralPage implements OnInit {
-
+data: any;
 private showData;
 public name: string;
 public email: string;
@@ -23,8 +24,8 @@ public school: string;
   constructor(private authService: AuthenticationService,
       public toastController: ToastController,
       public alertCtrl: AlertController,
-      private nav: NavController) {
-   
+      private nav: NavController,
+      private router: Router) {
    }
   ngOnInit() {
     
@@ -37,13 +38,15 @@ public school: string;
   }
 
   async refer() {
-    this.authService.refer(this.name, this.email,this.age, this.school).subscribe(res => {
-       
-     this.showAlertSuccess(res);
+    this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
+    if (res == true){
+            this.showAlertSuccess(res);
         this.nav.navigateForward('/admin');
-  
+    }
     }, err => {
-      
+      console.log('duplicate email');
+      this.showAlertDuplicate(err.error.text);
+      this.nav.navigateForward('/referral');
     });
   }
   async showAlert(msg){
@@ -62,10 +65,12 @@ async showAlertSuccess(msg){
   });
   await alert.present();
 }
-clear(){
-  this.name='';
-  this.email='';
-  this.school='';
-  this.age= null;
+async showAlertDuplicate(msg){
+  const alert = await this.alertCtrl.create({
+    header: 'Duplicate Referral',
+    message: 'Student Referral Exists:',
+    buttons: ['OK']
+  });
+  await alert.present();
 }
 }

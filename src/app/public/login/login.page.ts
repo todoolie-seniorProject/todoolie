@@ -19,7 +19,10 @@ export class LoginPage implements OnInit {
   userInfo: { username: any[]; password: any[]; };
   public username: string;
   public password: string;
-  
+   todoolieUser = {
+    username: this.username,
+    password: this.password
+  }
   constructor(private authService: AuthenticationService,
     private storage: Storage,
     private http: HttpClient,
@@ -29,14 +32,14 @@ export class LoginPage implements OnInit {
     private router: Router
     ) { }
 
-  //  openDetailsWithState(){
-  //    let navigationExtras : NavigationExtras = {
-  //      state : {
-  //        userInfo: this.userInfo
-  //      }
-  //    };
-  //    this.router.navigate(['referral']),navigationExtras ) ;
-  //     }
+   openDetailsWithState(){
+     let navigationExtras : NavigationExtras = {
+       state : {
+         todoolieUser: this.todoolieUser
+       }
+     };
+     this.router.navigate(['referral'],navigationExtras);
+      }
     // setUsername(username){
     //   this.username = username;
     // }
@@ -114,4 +117,5 @@ async showSuccess(msg){
     await alert.present();
 
 }
+
 }

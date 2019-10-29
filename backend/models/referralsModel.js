@@ -37,8 +37,18 @@ Task.createReferral = function (body, result) {    // model function which will 
         });           
 };
 Task.checkIfReferralExists = function(body,results){
-    sql.query("SELECT referfriend WHERE name ==")
-}
+    sql.query("SELECT refername WHERE name = ?", [body.email], function(err,res){
+    
+    if (err){
+        console.log("error: ", err);
+        result(err,null);
+    }
+    else{
+        console.log(res);
+        result(null,res);
+    }
+    });
+};
 
 Task.getDistinctreferrals = function (result) {
     sql.query("SELECT DISTINCT refername AS `distinct name` FROM Referral", function (err, res) {//sql qurey to request all referrals in the db.
