@@ -22,7 +22,7 @@ Task.getAllreferrals = function (result) {
             }
         });   
 };
-Task.createReferral = function (body, result) {    // model function which will actually insert ddata in referral table
+Task.createReferral = function (body, result) {    // model function which will actually insert data in referral table
     //the below is the query to insert data, it takes from user the username and rollnum and set status 0 as in start
     //the status of the referral will be 0, it will later be changed on verification
     sql.query("INSERT INTO Referral (Referfriend, Age, Email, School) values (?,?,?,?)", [body.name, body.age, body.email, body.school ], function (err, res) {
@@ -40,76 +40,5 @@ Task.createReferral = function (body, result) {    // model function which will 
 
 
 
-// Task.putAllReferrals = function (result) {
-//     sql.query("SELECT * from Referrals", function (err, res) { 
 
-//             if(err) {
-//                 console.log("error: ", err);
-//                 result(null, err);
-//             }
-//             else{
-//                 console.log('tasks : ', res);  
-//                 result(null, res); // send result to controller
-//             }
-//         });   
-// };
-
-// Task.putReferral = function (req, result) {    
-//     //query takes two input, one is status user wants to set and other is from parameters of URL which is id
-//     //id here is id of referral and comes in like this localhost:3000/referral/:id
-//     sql.query("UPDATE Referrals SET Status = ? WHERE ID = ?", [req.body.status, req.params.id], function (err, res) {
-            
-//             if(err) {
-//                 console.log("error: ", err); // iff error occurs, show
-//                 result(err, null);
-//             }
-//             else{
-//                 console.log(res);
-//                 result(null, res); //if no error occurs, show res which means response
-//             }
-//         });           
-// };
-
-// Task.deleteReferral = function (req, result) {  //function to delete referral  
-
-//     //query takes only one input which is ID of referral u want to delete
-//     // it comes in parameters in url with loclahost:3000/referral/:id, here :id is id of referral
-//     sql.query("DELETE FROM Referrals WHERE ID = ?", [req.params.id], function (err, res) { 
-            
-//             if(err) {
-//                 console.log("error: ", err); // iff error occurs, show
-//                 result(err, null);
-//             }
-//             else{
-//                 console.log(res);
-//                 result(null, res); //if no error occurs, show res which means response
-//             }
-//         });           
-// };
-// Task.getAllReferrals = function (result) {
-//     sql.query("SELECT * from Referrals", function (err, res) { //select all data from referrals table and return to controller
-
-//             if(err) {
-//                 console.log("error: ", err);
-//                 result(null, err);
-//             }
-//             else{
-//                 console.log('tasks : ', res);  
-//                 result(null, res); // send result to controller
-//             }
-//         });   
-// };
-// ask.checkUs = function (body, result) {    
-//     sql.query("INSERT * from Users WHERE Username = ? AND Password = ?", [body.username, body.pass], function (err, res) {
-            
-//             if(err) {
-//                 console.log("error: ", err);
-//                 result(err, null);
-//             }
-//             else{
-//                 console.log(res);
-//                 result(null, res);
-//             }
-//         });           
-// };
 module.exports= Task;

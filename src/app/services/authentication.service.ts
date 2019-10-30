@@ -1,4 +1,4 @@
-import { Platform, Config } from '@ionic/angular';
+import { Platform, Config, NavController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Storage } from '@ionic/storage';
@@ -7,6 +7,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { environment, SERVER_URL } from '../../environments/environment';
 import {AlertController} from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 const TOKEN_KEY = 'auth-token';
 @Injectable({
@@ -17,7 +18,8 @@ export class AuthenticationService {
   constructor(private storage: Storage,
      private plt: Platform,
       private http: HttpClient,
-      public alertController: AlertController
+      public alertController: AlertController,
+      private NavController: NavController,
       ) {
     this.plt.ready().then(() => {
       this.checkToken();
@@ -37,17 +39,26 @@ export class AuthenticationService {
    });
   }
   login(username: string, password: string): any {
-    
    let user = {"username": username, "pass": password}
    console.log(user);
-   return this.http.post(SERVER_URL+'/login', user);
+   return this.http.post(SERVER_URL + '/login', user);
   }
 
   refer( name: string, email : string, age: number, school : string): any{
+    if (name == undefined || email == null || school == null) {
+      this.blankReferral();
+      this.NavController.navigateRoot('referral');
+    }
+    else {
   let user ={ "name" : name, "age": age, "email": email, "school": school}
   console.log(user);
   return this.http.post(SERVER_URL+'/referral', user);
-  }
+  }}
+
+
+
+
+
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
@@ -71,16 +82,17 @@ export class AuthenticationService {
     await alert.present();
   }
 
+  async blankReferral(){
+    const alert = await this.alertController.create({
+      header: 'Empty data',
+      message: 'Input information if you want to make referral',
+      buttons:['ok']
+    });
+    await alert.present();
+  }
 
 
- /* private handleError (error : HttpErrorResponse){
-    if(error.error instanceof ErrorEvent){
-      console.error('An error has occured:', error.error.message);
-    }
-    else {
-      console.error('Backend returned code ${error.status} '+ 'body was: ${error.error}');
-    }
-    return throwError('something bad has happened; please try again later.');
-  } */
-} 
+
+
+}
 

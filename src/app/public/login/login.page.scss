@@ -4,8 +4,14 @@
 }
 
 .page1{
-    --background: url('../../../assets/img/BeginBG.jpeg') 0 0/100% 100% no-repeat;;
-    
+    --background: url('../../../assets/img/BeginBG.jpeg') 0 0/100% 100% no-repeat ;
+   
 }
 
 
+.loginPic{ max-width: 500px;  width: 50%;  margin: 0 auto; display:block;}
+
+.loginInput{
+    --padding-bottom: 100px;
+    --padding-top:100px;
+}

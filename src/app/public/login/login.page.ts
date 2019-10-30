@@ -28,38 +28,49 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-async login() {
-  this.authService.login(this.username, this.password).subscribe(res => {
-    // randy
-    if (res  == true){
-      this.showAlert(res); //show in alert message box whetever result comes
+  async login() {
+    this.authService.login(this.username, this.password).subscribe(res => {
+      // randy
+      if (res  == true){
+        this.showSuccess(res);  // this alert shows a successful login after authentication is true, and then navigates to the dashboard
+      }
+  }, err => {
+    {
+    // shows alert that the username and password is incorrect
+    this.showAlert(err.error.text);
+    this.nav.navigateBack('login');
+    }
+  });
+  }
+// successful login alert
+async showSuccess(msg){
+  const alert = await this.alertCtrl.create({
+    header: 'Successful Login!',
+    message: '',
+    buttons: [ {
+      text: 'OK',
+    handler: () => {
       this.nav.navigateForward('/dashboard');
     }
-}, err => {
-  // shows alert that the username and password is incorrect
-  this.showAlert(err.error.text);
-});
-}
-
-async showAlert(type){
-  if(type == 'error'){
-    const alert = await this.alertCtrl.create({
-      header: 'Error',
-      message: 'username and password did not match',
-      buttons: ['OK']
-    });
-    await alert.present();
-  } else if (type == 'success'){
-    const alert = await this.alertCtrl.create({
-      header: 'success',
-      message: 'logged in successfully',
-      buttons: ['OK']
-    });
-    await alert.present();
   }
-}
-ngOnDestroy() {
-  this.loginSub.unsubscribe();
+]
+  });
+  await alert.present();
 }
 
+//f ailed login alert
+ async showAlert(msg){
+    const alert = await this.alertCtrl.create({
+      header: 'Error!',
+      message: 'Wrong username or password.',
+      buttons: ['OK']
+    });
+    await alert.present();
+
 }
+}
+// ngOnDestroy() {
+//   this.loginSub.unsubscribe();
+// }
+
+

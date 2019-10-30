@@ -11,17 +11,17 @@ exports.ListAllreferrals = function(req, res){
 };
 exports.createNewReferrals = function(req, res) {
 
-  if(req.body.referfriend){
+  if(req.body.Referfriend){
     console.log("referral is empty");
            res.status(400).send({ error:true, message: "message me" });
 
        }
   else{
-    Task.createReferral(req.body, function(err,Task){
+    Task.createReferral(req.body, function(err,task){
       if(err)
       res.send(err);
       
-      else if (task.refername){
+      else if (task.Referfriend){
         res.send('successful referral');
       }
       else {

@@ -4,14 +4,53 @@
       <ion-button (click)='logout()'>
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
-      <ion-button (click) = 'referout()'>
+      <!-- <ion-button (click) = 'referout()'>
         <ion-icon slot = "icon-only" name = "document"></ion-icon>
-      </ion-button>
+      </ion-button> -->
     </ion-buttons>
-    <ion-title>My Dashboard</ion-title>
+    <ion-title style="text-align:center">Student Ambassador Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
  
-<ion-content padding>
- 
+
+
+
+
+
+
+<ion-content padding class="page3">
+  <div class="spacer" style="height:20px;"></div>
+
+  <!-- <h1 id="page-heading1" style=" color: #f26522; text-align:center;">
+    Welcome to ToDoolie!
+  </h1>
+  <div id="page-markdown2" style="text-align:center;" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      What&#39;s your ToDo?
+    </p>
+  </div>
+  <div class="spacer" style="height:40px;"></div> -->
+
+  <ion-card>
+    <ion-card-header >
+      <ion-card-title style="text-align:center">Click Here To Make A Referral !</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+  
+<!-- <h2 style="text-align:center">Click Here To Make A Referral!</h2> -->
+  <div class="btn-wrapper">
+    <ion-button id="page-button1" (click)='referout()' color="primary" expand="block">Submit Referral</ion-button>
+
+
+    <div class="spacer" style="height:60px;"></div>
+    <!-- <div class="dashPic">
+      <ion-img style="width: 400px; height:200px;" src='../../../assets/img/login2.jpg'></ion-img>
+    </div> -->
+  
+  </div>
 </ion-content>

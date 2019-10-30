@@ -23,16 +23,15 @@ public school: string;
   constructor(private authService: AuthenticationService,
       public toastController: ToastController,
       public alertCtrl: AlertController) {
-   
+
    }
   ngOnInit() {
-    
   }
   referout(){
     this.authService.referout();
   }
   async refer() {
-    this.authService.refer(this.name, this.email,this.age, this.school).subscribe(res => {
+    this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
       this.showAlert(res);
   }, err => {
     this.showAlert(err.error.text);
@@ -41,7 +40,7 @@ public school: string;
   async showAlert(msg){
     const alert = await this.alertCtrl.create({
       header: 'Server Message',
-      message: "succesfull referrral",
+      message: 'succesfull referral',
       buttons: ['OK']
     });
     await alert.present();
