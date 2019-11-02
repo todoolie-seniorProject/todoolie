@@ -5,6 +5,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { NavController, ToastController, AlertController} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { SERVER_URL } from 'src/environments/environment';
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.page.html',
@@ -17,8 +19,7 @@ export class AdminPage implements OnInit {
     public toastController: ToastController,
     public alertCtrl: AlertController,
     private nav: NavController,
-
-    ) { }
+    private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -27,5 +28,21 @@ export class AdminPage implements OnInit {
         // this.showAlert(res); //show in alert message box whetever result comes
         this.authService.payment();
       }
+      showReferral(){
+      this.http.get(SERVER_URL+'/referral').subscribe(data=>{
+        console.log(data)
+      })
+    }
+    logout() {
+      this.authService.logout();
+    }
+   async showAlert(){
+      const alert = await this.alertCtrl.create({
+        header: 'Stripe Payment',
+        message: 'Please input your payment information!',
+        buttons: ['OK'],
+      });
+      await alert.present();
+    }
 
 }

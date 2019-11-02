@@ -1,9 +1,50 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>PAYMENT PAGE</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+    <ion-toolbar color="primary" >
+      <ion-buttons slot="start">
+        <ion-button (click)='logout()'>
+          <ion-icon slot="icon-only" name="log-out"></ion-icon>
+        </ion-button>
+        <!-- <ion-button (click) = 'referout()'>
+          <ion-icon slot = "icon-only" name = "document"></ion-icon>
+        </ion-button> -->
+      </ion-buttons>
+      <ion-title style="text-align:center">Student Ambassador Dashboard</ion-title>
+    </ion-toolbar>
+  </ion-header>
+   
+  
+  
+  
+  
+  
+  
+  <ion-content padding class="page4">
+    <div class="spacer" style="height:80px;"></div>
+  
+  
+    <ion-card>
+      <ion-card-header >
+        <ion-card-title style="text-align:center">Congratulations! You can be paid for a successful referral!</ion-card-title>
+      </ion-card-header>
+    
+      <!-- <ion-card-content> -->
+          <div class="spacer" style="height:20px;"></div>
+        <ion-card-title style="text-align:center">
+        Once your referral has completed a successful job! ToDoolie will notify you when your payment will be processed!
+        </ion-card-title>
+        <div class="spacer" style="height:40px;"></div>
+      <!-- </ion-card-content> -->
+    </ion-card>
+    
+  <!-- <h2 style="text-align:center">Click Here To Make A Referral!</h2> -->
+    <div class="btn-wrapper">
+      <ion-button id="page-button1" (click)='showAlert()' color="primary" expand="block">Recieve Payment</ion-button>
+  
+  
+      <div class="spacer" style="height:60px;"></div>
+      <!-- <div class="dashPic">
+        <ion-img style="width: 600px; height:300px;" src='../../../assets/img/group.png'></ion-img>
+      </div> -->
+    
+    </div>
+  </ion-content>

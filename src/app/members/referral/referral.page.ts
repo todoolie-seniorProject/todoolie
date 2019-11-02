@@ -39,21 +39,26 @@ public school: string;
 
   async refer() {
     this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
-    if (res == true){
-            this.showAlertSuccess(res);
-        this.nav.navigateForward('/admin');
+    if (res.hasOwnProperty('code')){
+      this.showAlertDuplicate(res);
+        this.nav.navigateForward('/referral');
+        console.log("if res has own property");
+    }
+    else{
+      console.log('err bracket');
+      this.showAlertSuccess(res);
+      this.nav.navigateForward('/admin');
     }
     }, err => {
-      console.log('duplicate email');
-      this.showAlertDuplicate(err.error.text);
-      this.nav.navigateForward('/referral');
+      console.log(err);
     });
   }
   async showAlert(msg){
     const alert = await this.alertCtrl.create({
       header: 'Server Message',
       message: 'Referral Cannnot be empty',
-      buttons: ['OK']
+      buttons: ['OK'],
+      
     });
     await alert.present();
 
@@ -68,7 +73,7 @@ async showAlertSuccess(msg){
 async showAlertDuplicate(msg){
   const alert = await this.alertCtrl.create({
     header: 'Duplicate Referral',
-    message: 'Student Referral Exists:',
+    message: 'Student Referral already Exists:',
     buttons: ['OK']
   });
   await alert.present();

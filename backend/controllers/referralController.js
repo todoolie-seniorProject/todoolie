@@ -1,7 +1,7 @@
 var Task = require('../models/referralsModel.js'); // path to referrals model file
 
 exports.ListAllreferrals = function(req, res){// funcition calling referral model function.
-  Task.getDistinctreferrals(function(err,task){
+  Task.getAllreferrals(function(err,task){
   console.log('Controller')
   if(err)
   res.send(err);
@@ -9,29 +9,49 @@ exports.ListAllreferrals = function(req, res){// funcition calling referral mode
   res.send(task);// sending all referrals located in the db to server.
 });
 };
-exports.createNewReferrals = function(req, res) {
+// exports.createNewReferrals = function(req, res) {
+//   if(req.body.refername){
+//     console.log("referral is empty");
+//     res.status(400).send({error: true, message: "message me"});
+//   }
+//     Task.createReferral(req.body, function(err,task){// calls the referral model function if name is not empty.
+  
+//       if(err)
+//       res.send(err);
+//       else if (task.refername){
+//         console.log('yoyoyo')
+//         res.send(false);
+//       }
+//       else {
+//         console.log('baaadh')
+//         res.send(false);
+//       }
+//     });
+//     res.send(true);
+ 
+// };
 
-  task.checkIfReferralExists(req.body, function(err,task){
-    if(err)
-    res.send(err);
+exports.createNewReferrals = function(req, res) {
+  if(req.body.refername){
+    console.log("email exisits");
+    res.status(400).send({error: true, message: "message me"});
+  }
   else{
     Task.createReferral(req.body, function(err,task){// calls the referral model function if name is not empty.
   
       if(err)
       res.send(err);
-      else if (task.refername > 0){
+      else if (task.refername){
         console.log('yoyoyo')
-        res.send(true);
+        res.send("success");
       }
       else {
         console.log('baaadh')
-        res.send(false);
+        res.send(req.body == true);
       }
     });
+  }
   };
-
-});
-};
 
 
 

@@ -55,6 +55,10 @@ export class AuthenticationService {
   console.log(user);
   return this.http.post(SERVER_URL+'/referral', user);
   }}
+  emailChecker( email: string):any{
+    let user = {"email" : email}
+    return this.http.post(SERVER_URL+ '/referral', user);
+  }
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
