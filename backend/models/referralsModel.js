@@ -22,7 +22,24 @@ Task.getAllreferrals = function (result) {
             }
         });   
 };
-Task.createReferral = function (body, result) {    // model function which will actually insert ddata in referral table
+Task.createReferral = function (body, result) {
+    var emailValid = 0;
+    sql.query("select * from Referral where Email = ?", body.email, function(err, res) {
+        if(err) {
+            console.log("error: ", err); // iff error occurs, show
+            result(err, null); 
+        }
+        else {
+            if(res.length > 0) {
+                emailValid = 1;
+            }
+        }
+    });
+
+    if(emailValid == 1) {
+        result(null, "This email already exist, choose some other.");
+    }
+    // model function which will actually insert ddata in referral table
     //the below is the query to insert data, it takes from name, age, email, and school and inputs into the db.
     sql.query("INSERT INTO Referral (Refername, Age, Email, School) values (?,?,?,?)", [body.name, body.age, body.email, body.school ], function (err, res) {
             
@@ -32,23 +49,13 @@ Task.createReferral = function (body, result) {    // model function which will 
             }
             else{
                 console.log(res);
-                result(null, res); //if no error occurs, show res which means response
+                result(null, "success"); //if no error occurs, show res which means response
             }
         });           
 };
 Task.checkIfReferralExists = function(body,results){
-    sql.query("SELECT refername WHERE name = ?", [body.email], function(err,res){
-    
-    if (err){
-        console.log("error: ", err);
-        result(err,null);
-    }
-    else{
-        console.log(res);
-        result(null,res);
-    }
-    });
-};
+    sql.query("SELECT referfriend WHERE name ==")
+}
 
 Task.getDistinctreferrals = function (result) {
     sql.query("SELECT DISTINCT refername AS `distinct name` FROM Referral", function (err, res) {//sql qurey to request all referrals in the db.
@@ -63,6 +70,7 @@ Task.getDistinctreferrals = function (result) {
             }
         });   
 };
+
 
 
 

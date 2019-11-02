@@ -5,23 +5,23 @@
 </ion-header>
 
 <ion-content>
-<form [formGroup] = "referral" (ngSubmit) = "referralForm()">
-  <ion-item>
+<ion-list> 
+ <ion-item>
     <ion-label>Name : </ion-label>
-    <ion-input type = "text" formControlName = "name"></ion-input>
+    <ion-input type = "text" require placeholder = "name"  [(ngModel)]="name" ></ion-input>
   </ion-item>
   <ion-item>
       <ion-label>Email : </ion-label>
-      <ion-input type = "text" formControlName = "email" ngModel [email] = "true"></ion-input>
+      <ion-input type = "text" required require placeholder = "email" [(ngModel)]="email"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label>Age : </ion-label>
-        <ion-input type = "number" formControlName = "age"></ion-input>
+        <ion-input type = "number" require placeholder = "age" ngmodel maxLength = 2 [(ngModel)]="age"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label>school : </ion-label>
-          <ion-input type = "text" formControlName = "school"></ion-input>
+          <ion-input type = "text" require placeholder = "school" [(ngModel)]="school"></ion-input>
         </ion-item>
-        <ion-button (click) = 'login()' expand = "block">refer-a-friend</ion-button>
-</form>
+      </ion-list> 
+        <ion-button (click) ='payment(); refer()' expand = "block">refer-a-friend</ion-button>
 </ion-content>

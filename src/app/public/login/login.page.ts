@@ -5,14 +5,18 @@ import { HttpHeaders } from '@angular/common/http';
 import { NavController, ToastController, AlertController} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { Router, NavigationExtras } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
+
 export class LoginPage implements OnInit {
   authenticationState = new BehaviorSubject(false);
+  userInfo: { username: any[]; password: any[]; };
   public username: string;
   public password: string;
   
@@ -22,8 +26,23 @@ export class LoginPage implements OnInit {
     private nav: NavController,
     public toastController: ToastController,
     public alertCtrl: AlertController,
-    public NavContoller: NavController
+    private router: Router
     ) { }
+
+  //  openDetailsWithState(){
+  //    let navigationExtras : NavigationExtras = {
+  //      state : {
+  //        userInfo: this.userInfo
+  //      }
+  //    };
+  //    this.router.navigate(['referral']),navigationExtras ) ;
+  //     }
+    // setUsername(username){
+    //   this.username = username;
+    // }
+    // getUsername(){
+    //   return this.username;
+    // }
   ngOnInit() {
   }
 //   async login() {
@@ -43,19 +62,18 @@ export class LoginPage implements OnInit {
 async login() {
   this.authService.login(this.username, this.password).subscribe(res => {
     // randy
-    if (res==true){
+    if (res  == true){
       // this.showAlert(res); //show in alert message box whetever result comes
-      this.NavContoller.navigateForward('/referral');
+      this.showSuccess(res);
     }
-     else {
-      this.showAlert(res);//fariha
-    }
-    
 }, err => {
+  {
+  // shows alert that the username and password is incorrect
   this.showAlert(err.error.text);
+  this.nav.navigateBack('login');
+  }
 });
 }
-
 
 
 
@@ -73,11 +91,24 @@ async login() {
 // }
 
 // }
-
+async showSuccess(msg){
+  const alert = await this.alertCtrl.create({
+    header: 'Successful Login!',
+    message: '',
+    buttons: [ {
+      text: 'OK',
+    handler: () => {
+      this.nav.navigateForward('/dashboard');
+    }
+  }
+]
+  });
+  await alert.present();
+}
  async showAlert(msg){
     const alert = await this.alertCtrl.create({
-      header: 'Server Message',
-      message: msg,
+      header: 'Error!',
+      message: 'Wrong username or password.',
       buttons: ['OK']
     });
     await alert.present();

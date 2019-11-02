@@ -5,26 +5,27 @@ import { HttpHeaders } from '@angular/common/http';
 import { NavController, ToastController, AlertController} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss'],
+  selector: 'app-admin',
+  templateUrl: './admin.page.html',
+  styleUrls: ['./admin.page.scss'],
 })
-export class DashboardPage implements OnInit {
-  constructor(private authService: AuthenticationService,private storage: Storage,
-    private http: HttpClient,
-    private nav: NavController,
+export class AdminPage implements OnInit {
+  loginPage: any;
+
+  constructor(private authService: AuthenticationService,
     public toastController: ToastController,
-    public alertCtrl: AlertController) { }
+    public alertCtrl: AlertController,
+    private nav: NavController,
+
+    ) { }
+
   ngOnInit() {
   }
 
-  logout() {
-    this.authService.logout();
-  }
-  referout() {
-    this.nav.navigateRoot('/referral');
-  }
+  async payment(){
+        // this.showAlert(res); //show in alert message box whetever result comes
+        this.authService.payment();
+      }
 
 }
