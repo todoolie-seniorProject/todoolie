@@ -12,6 +12,7 @@ import { Config } from '@ionic/core';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+ 
   config: {};
   configService: any;
   error: { (message?: any, ...optionalParams: any[]): void; (message?: any, ...optionalParams: any[]): void; };

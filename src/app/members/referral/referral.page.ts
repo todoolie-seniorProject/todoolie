@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { ToastController } from '@ionic/angular';
+import {NavController, AlertController, ToastController } from '@ionic/angular';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { Storage } from '@ionic/storage';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-referral',
@@ -9,44 +13,80 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./referral.page.scss'],
 })
 export class ReferralPage implements OnInit {
-private referral : FormGroup;
+
 private showData;
+public name: string;
+public email: string;
+public age: number;
+public school: string;
 
-  constructor(private authService: AuthenticationService, private fb: FormBuilder, public toastController: ToastController) {
-    this.referral=fb.group({
-      name: ["", Validators.required],
-      email: ["", Validators.required],
-      age: ["", Validators.required],
-      school: ["",Validators.required]
-    });
-    this.showData = {
-      name:"",
-      email:"",
-      age:"",
-      school:""
-    }
+  constructor(private authService: AuthenticationService,
+      public toastController: ToastController,
+      public alertCtrl: AlertController,
+      private nav: NavController) {
+   
    }
-async referralForm()
-{
-  this.showData= this.referral.value
-  const toast = await this.toastController.create({
-    message: 'your profile has been updated.',
-    duration:4000
-  });
-}
-clearReferral(){
-  this.referral.reset()
-  this.showData= {
-    name: '',
-    email: '',
-    age: '',
-    school: ''
-  }
-}
   ngOnInit() {
+    
   }
-  logout(){
-    this.authService.logout();
+  referout(){
+    this.authService.referout();
+  }
+  payment(){
+    this.nav.navigateRoot('/admin');
   }
 
+  async checkEmail() {
+    
+  }
+
+  async refer() {
+    // the regex that checks the input email if its in format and is a valid email
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(!re.test(this.email)) { //testing the email on the above regex
+      this.showAlert("Please enter a valid email"); //show message if email is invalid
+      this.nav.navigateBack('/referral'); // stay on referral page if email is invalid
+    }
+    else { // if email is valid then this will run
+      this.authService.refer(this.name, this.email,this.age, this.school).subscribe(res => {
+        if(res.hasOwnProperty('code')) {
+          this.showAlert("The email already exists with this email! ");
+          this.nav.navigateBack('/referral');
+        }
+        else {
+        console.log(res);//fariha
+        this.showAlertSuccess(res);
+          this.nav.navigateForward('/admin'); //temporary remove
+        }
+    
+      }, err => {
+        console.log(err); //f
+      });
+    }
+  }
+  async showAlert(msg){
+    const alert = await this.alertCtrl.create({
+      header: 'Server Message',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
+
+}
+async showAlertSuccess(msg){
+  const alert = await this.alertCtrl.create({
+    header: 'Successfull Referrral!',
+    buttons: ['OK']
+  });
+  await alert.present();
+}
+
+
+
+clear(){
+  this.name='';
+  this.email='';
+  this.school='';
+  this.age= null;
+}
 }
