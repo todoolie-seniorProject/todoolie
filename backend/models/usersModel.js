@@ -29,7 +29,12 @@ Task.checkUser = function (body, result) {
                 result(err, null);
             }
             else{
+<<<<<<< HEAD
                 console.log('hey its me');
+=======
+                
+                console.log(res);
+>>>>>>> master
                 result(null, res);
             }
         });           

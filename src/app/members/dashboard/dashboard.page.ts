@@ -26,4 +26,8 @@ export class DashboardPage implements OnInit {
   referout() {
     this.nav.navigateRoot('/referral');
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 }

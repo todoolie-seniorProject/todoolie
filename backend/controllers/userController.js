@@ -5,7 +5,7 @@ exports.list_all_users = function(req, res) {
       console.log('controller')
       if (err)
         res.send(err);
-        console.log('res', task);
+        console.log('results :', task);
       res.send(task);
     });
 };
@@ -13,8 +13,7 @@ exports.list_all_users = function(req, res) {
 exports.check_login_creds = function(req, res) {
 
      if(!req.body.username|| !req.body.pass){
-  
-              res.status(400).send({ error:true, message: "enter username and pass" });
+              res.status(400).send({ error:true, message: "enter username and password" });
   
           }
   else{
@@ -23,7 +22,10 @@ exports.check_login_creds = function(req, res) {
       if (err)
         res.send(err);
       else if (task.length > 0) {
+<<<<<<< HEAD
         console.log("Login Successful!");
+=======
+>>>>>>> master
             res.send(true);
 
         }

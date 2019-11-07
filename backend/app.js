@@ -81,6 +81,23 @@ Object.keys(APIS).forEach(function (key) {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+<<<<<<< HEAD
+=======
+ var originsWhitelist = [
+  'http://localhost:4200' //allowing requests from this website, which is our front-end
+ 
+];
+var corsOptions = {
+  origin: function(origin, callback){
+        var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+        callback(null, isWhitelisted);
+  },
+  credentials:true
+}
+//here is the magic
+app.use(cors(corsOptions));
+
+>>>>>>> master
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

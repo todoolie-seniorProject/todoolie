@@ -1,4 +1,5 @@
 <ion-header>
+<<<<<<< HEAD
   <ion-toolbar color="primary">
     <ion-title padding center text-center>Student Ambassador Dashboard</ion-title>
   </ion-toolbar>
@@ -38,3 +39,51 @@
       <div class="spacer" style="height:20px;"></div>
         <ion-button (click) = 'refer()' expand = "block">Submit</ion-button>
 </ion-content>
+=======
+    <ion-toolbar color="primary">
+      <ion-title padding center text-center>Student Ambassador Dashboard</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class = "page2">
+      <div class="spacer" style="height:20px;"></div>
+  
+      <div class="referPic">
+          <ion-img style="width: 312px; height:161px;" src='../../../assets/img/logo.png'></ion-img>
+        </div>
+      <!-- <h1 id="page-heading1">
+        Welcome to ToDoolie!
+      </h1> -->
+      <div class="spacer" style="height:40px;"></div>
+      <ion-card>
+          <ion-card-header >
+            <ion-card-title style="text-align:center">Referral Form</ion-card-title>
+          </ion-card-header>
+            
+       
+        </ion-card>
+  <ion-list> 
+   <ion-item>
+      <ion-label>Name : </ion-label>
+      <ion-input type = "text" require placeholder = "name" [(ngModel)]="name" ></ion-input>
+    </ion-item>
+    <div class="spacer" style="height:2px;"></div>
+    <ion-item>
+        <ion-label>Email : </ion-label>
+        <ion-input type = "email" require placeholder = "email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <div class="spacer" style="height:2px;"></div>
+      <ion-item>
+          <ion-label>Age : </ion-label>
+          <ion-input type = "number" require placeholder = "age" [(ngModel)]="age"></ion-input>
+        </ion-item>
+        <div class="spacer" style="height:2px;"></div>
+        <ion-item>
+            <ion-label>school : </ion-label>
+            <ion-input type = "text" require placeholder = "school" [(ngModel)]="school"></ion-input>
+          </ion-item>
+        </ion-list> 
+        <div class="spacer" style="height:20px;"></div>
+          <ion-button (click) = 'payment() ;refer()' expand = "block">Submit</ion-button>
+  </ion-content>
+>>>>>>> master

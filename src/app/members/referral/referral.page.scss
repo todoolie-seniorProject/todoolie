@@ -11,4 +11,18 @@
     color: #f26522; text-align:center;
 }
 
+<<<<<<< HEAD
 .referPic{ max-width: 500px;  width: 50%;  margin: 0 auto; display:block;}
+=======
+.referPic{ max-width: 500px;  width: 50%;  margin: 0 auto; display:block;}
+
+
+ion-card {
+    --padding-top:20px;
+    --padding-bottom:20px;
+  --position: relative;
+  --text-align: center;
+//   --background: white;
+  --background: rgba(255, 255, 255, 0.5);
+}
+>>>>>>> master
