@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
     }
   });
   }
-// successful login alert
+// successful login alert which then navigates to the dashboard page
 async showSuccess(msg){
   const alert = await this.alertCtrl.create({
     header: 'Successful Login!',
@@ -58,7 +58,7 @@ async showSuccess(msg){
   await alert.present();
 }
 
-//f ailed login alert
+// failed login alert
  async showAlert(msg){
     const alert = await this.alertCtrl.create({
       header: 'Error!',

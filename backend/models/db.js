@@ -12,7 +12,6 @@ db.connect((err) => { // here we attempt to connect with db, "db" variable has s
   if(err){
     throw err; // if error occurs during trying to connect, it will be shown on console
   }
-  //if doesnt throw error, means connected to the databse
   console.log("mydb connected"); // so this means no error, so we print a message to show we are connected
   db.query("use todoolie_db"); // we type this to use the database todoolie_db
 });

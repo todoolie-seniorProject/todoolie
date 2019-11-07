@@ -1,20 +1,21 @@
-<!-- <ion-header class="bar bar-header bar-royal">
-  <ion-toolbar>
+<ion-header>
+    <ion-toolbar color="primary" >
     <ion-title padding center text-center>Student Ambassador Program</ion-title>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
  
 <ion-content class="page1">
 
   <div class="spacer" style="height:20px;"></div>
 
-  <h1 id="page-heading1" style=" color: #f26522; text-align:center;">
+  <div class="loginPic">
+      <ion-img style="width: 312px; height:161px;" src='../../../assets/img/logo.png'></ion-img>
+    </div>
+  <div id="page-markdown2" style="text-align:center;">
+  <!-- <h1 id="page-heading1" style=" color: #f26522; text-align:center;">
     Welcome to ToDoolie!
-  </h1>
-  <div id="page-markdown2" style="text-align:center;" class="show-list-numbers-and-dots">
-    <p style="color:#000000;">
-      What&#39;s your ToDo?
-    </p>
+  </h1> -->
+
   </div>
   <div class="spacer" style="height:40px;"></div>
 
@@ -24,7 +25,7 @@
       </ion-input>
     </ion-item>
 
-    <div class="spacer" style="height:5px;"></div>
+    <div class="spacer" style="height:2px;"></div>
 
     <ion-item detail>
       <ion-input type="password" required placeholder="Password" [(ngModel)]="password"></ion-input>
@@ -32,12 +33,12 @@
   
 
   <div class="btn-wrapper">
-    <ion-button id="page-button1" (click)='login()' color="primary" expand="block">Login</ion-button>
+    <ion-button class="page-button1" (click)='login()' color="primary" expand="block">Login</ion-button>
 
 
     <div class="spacer" style="height:60px;"></div>
     <div class="loginPic">
-      <ion-img style="width: 400px; height:200px;" src='../../../assets/img/login2.jpg'></ion-img>
+      <ion-img style="width: 312px; height:161px;" src='../../../assets/img/login2.jpg'></ion-img>
     </div>
   
   </div>
