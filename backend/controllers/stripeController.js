@@ -1,19 +1,21 @@
-const stripe = require("stripe")('SECRETKEYAHRAUEHAUHE');
+const stripe = require("stripe")('sk_test_od1fzSDcmNvtLTNfpBjfktxQ00uCAuL6pv');
+
+exports.listCustomers = function(req, res){ 
+  stripe.customers.list(
+    {limit: 10},
+    function(err, customers) {
+      res.send(customers);
+    }
+  );
+};
 
 exports.payTest = function(req, res){// funcition calling referral model function.
-    let amount = 500;
-  
-    stripe.customers.create({
-      email: req.body.email,
-      card: req.body.id
-    })
-    .then(customer =>
       stripe.charges.create({
-        amount,
-        description: "Sample Charge",
+        amount: req.body.amount,
+        description: req.body.description,
         currency: "usd",
-        customer: customer.id
-      }))
+        customer: req.body.id
+      })
     .then(charge => res.send(charge))
     .catch(err => {
       console.log("Error:", err);

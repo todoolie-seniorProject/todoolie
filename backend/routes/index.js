@@ -13,6 +13,7 @@ router.route('/referral').post(referralController.createNewReferrals); //post re
 
 router.route("/test").get(stripeController.show) //show sample screen
 router.route("/charge").post(stripeController.payTest); //testing stripe
+router.route("/customers").get(stripeController.listCustomers);
 
 
 module.exports = router;
