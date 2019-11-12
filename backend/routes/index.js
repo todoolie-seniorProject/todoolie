@@ -14,6 +14,11 @@ router.route('/referral').post(referralController.createNewReferrals); //post re
 router.route("/test").get(stripeController.show) //show sample screen
 router.route("/charge").post(stripeController.payTest); //testing stripe
 router.route("/customers").get(stripeController.listCustomers);
-
+router.route("/cc").post(stripeController.createCustomer);
+router.route("/register_bank").post(stripeController.create_acc);
+router.route("/pp").get(stripeController.payout);
+router.route("/do").get(stripeController.do);
+router.route("/ext").get(stripeController.ext);
+router.route("/tra").get(stripeController.tra);
 
 module.exports = router;
