@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', loadChildren: './public/login/login.module#LoginPageModule' },
+  
   //{ path: 'login', loadChildren: './payment/payment.module#PaymentPageModule' },
   { path: 'dashboard', loadChildren: './members/dashboard/dashboard.module#DashboardPageModule' },
   {

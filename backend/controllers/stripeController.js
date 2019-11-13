@@ -83,11 +83,12 @@ exports.create_acc = function(req, res) {
               function(err, bank_account) {
                 if(err)
                   res.send(err);
-                  console.log(bank_account);
+              
                   Task.storeBankInfo(req.body, function(err,Task){// calls the referral model function if name is not empty.
                     if(err)
                     res.send(err);
-                      res.send(Task);
+                    console.log(Task);
+                      res.send(bank_account);
                   });
               }
             );

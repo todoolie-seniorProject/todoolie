@@ -37,12 +37,7 @@ export class AdminPage implements OnInit {
       this.authService.logout();
     }
    async showAlert(){
-      const alert = await this.alertCtrl.create({
-        header: 'Stripe Payment',
-        message: 'Please input your payment information!',
-        buttons: ['OK'],
-      });
-      await alert.present();
+      this.nav.navigateRoot('/payment');
     }
 
 }
