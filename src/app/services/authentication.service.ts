@@ -24,6 +24,19 @@ export class AuthenticationService {
       this.checkToken();
     });
   }
+
+  bankinfo( name: string, email : string, routingno: string, accountno : string, fname: string, lname: string): any {
+    if(name == undefined || email == null || routingno == null || accountno == null){
+      this.blankReferral();
+      this.nav.navigateRoot('payment');
+    }
+    else {
+      let user = { "name" : name, "routing_no": routingno, "account_no": accountno, "email": email, "fname": fname, "lname": lname}
+      console.log(user);
+      return this.http.post(SERVER_URL+'/register_bank', user);
+    }
+  } 
+
   checkToken() {
     this.storage.get(TOKEN_KEY).then(res => {
       if (res) {

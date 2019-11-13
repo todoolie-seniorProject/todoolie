@@ -33,8 +33,8 @@ exports.create_acc = function(req, res) {
           email: req.body.email,
           business_type: 'individual',
           individual: {
-            first_name: 'abc',
-            last_name: 'def',
+            first_name: req.body.fname,
+            last_name: req.body.lname,
             ssn_last_4: '5234',
             address: {
               line1: 'asfasf',
@@ -43,7 +43,7 @@ exports.create_acc = function(req, res) {
               state: 'ID',
               postal_code: '21212'
             },
-            email: 'asfa@asfco.com',
+            email: req.body.email,
             phone: '(555) 671-2612',
             dob: {
               day: '10',
