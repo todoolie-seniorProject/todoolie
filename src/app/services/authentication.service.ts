@@ -31,7 +31,7 @@ export class AuthenticationService {
       this.nav.navigateRoot('payment');
     }
     else {
-      let user = { "name" : name, "routing_no": routingno, "account_no": accountno, "email": email, "fname": fname, "lname": lname}
+      let user = { "name" : name, "routing_no": routingno, "account_no": accountno, "email": email, "fname": fname, "lname": lname, "username": localStorage.getItem('userLogin')}
       console.log(user);
       return this.http.post(SERVER_URL+'/register_bank', user);
     }
@@ -64,7 +64,7 @@ export class AuthenticationService {
       this.nav.navigateRoot('referral');
     }
     else {
-  let user ={ "name" : name, "age": age, "email": email, "school": school}
+  let user ={ "name" : name, "age": age, "email": email, "school": school, "referby": localStorage.getItem('userLogin')}
   console.log(user);
   return this.http.post(SERVER_URL+'/referral', user);
   }}
@@ -74,6 +74,7 @@ export class AuthenticationService {
   }
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
+      localStorage.setItem('userLogin', null);
       this.authenticationState.next(false);
     });
   }

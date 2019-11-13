@@ -1,4 +1,5 @@
 const stripe = require("stripe")('sk_test_od1fzSDcmNvtLTNfpBjfktxQ00uCAuL6pv');
+var Task = require('../models/stripeModel');
 
 exports.listCustomers = function(req, res){ 
   stripe.customers.list(
@@ -10,85 +11,96 @@ exports.listCustomers = function(req, res){
 };
 
 exports.create_acc = function(req, res) {
-  stripe.tokens.create(
-    {
-      bank_account: {
-        country: 'US',
-        currency: 'usd',
-        account_holder_name: req.body.name,
-        account_holder_type: 'individual',
-        routing_number: req.body.routing_no,
-        account_number: req.body.account_no,
-      },
-    },
-    function(err, token) {
-      if(err)
-        res.send(err);
-
-      //var tokjs = JSON.parse(token);
-      stripe.accounts.create(
-        {
-          type: 'custom',
-          country: 'US',
-          email: req.body.email,
-          business_type: 'individual',
-          individual: {
-            first_name: req.body.fname,
-            last_name: req.body.lname,
-            ssn_last_4: '5234',
-            address: {
-              line1: 'asfasf',
-              line2: 'asfas',
-              city: 'asf',
-              state: 'ID',
-              postal_code: '21212'
-            },
-            email: req.body.email,
-            phone: '(555) 671-2612',
-            dob: {
-              day: '10',
-              month: '10',
-              year: '2000'
-            }
-          },
-          business_profile: {
-            url: 'asfasf.com' 
-          },
-          
-          tos_acceptance: {
-            date: Math.floor(Date.now() / 1000),
-            ip: req.connection.remoteAddress // Assumes you're not using a proxy
-          },
-          requested_capabilities: [
-            'transfers'
-          ],
-        },
-        function(err, account) {
-          //var accjs = JSON.parse(account)
-          if(err) {
-            console.log(err);
-            res.send(err);
-          }
-          stripe.accounts.createExternalAccount(
-            account.id,
-            {
-              external_account: token.id,
-            },
-            function(err, bank_account) {
-              if(err)
-                res.send(err);
-              res.send(bank_account);
-            }
-          );
-        }
-      );
-
-
-      
-
-
+  if(!req.body.name || !req.body.routing_no || !req.body.account_no || !req.body.fname ||
+    !req.body.lname || !req.body.username) {
+      res.send("missing parameters!");
     }
-  );
+  else {
+    stripe.tokens.create(
+      {
+        bank_account: {
+          country: 'US',
+          currency: 'usd',
+          account_holder_name: req.body.name,
+          account_holder_type: 'individual',
+          routing_number: req.body.routing_no,
+          account_number: req.body.account_no,
+        },
+      },
+      function(err, token) {
+        if(err)
+          res.send(err);
+
+        //var tokjs = JSON.parse(token);
+        stripe.accounts.create(
+          {
+            type: 'custom',
+            country: 'US',
+            email: req.body.email,
+            business_type: 'individual',
+            individual: {
+              first_name: req.body.fname,
+              last_name: req.body.lname,
+              ssn_last_4: '5234',
+              address: {
+                line1: 'asfasf',
+                line2: 'asfas',
+                city: 'asf',
+                state: 'ID',
+                postal_code: '21212'
+              },
+              email: req.body.email,
+              phone: '(555) 671-2612',
+              dob: {
+                day: '10',
+                month: '10',
+                year: '2000'
+              }
+            },
+            business_profile: {
+              url: 'asfasf.com' 
+            },
+            
+            tos_acceptance: {
+              date: Math.floor(Date.now() / 1000),
+              ip: req.connection.remoteAddress // Assumes you're not using a proxy
+            },
+            requested_capabilities: [
+              'transfers'
+            ],
+          },
+          function(err, account) {
+            //var accjs = JSON.parse(account)
+            if(err) {
+              console.log(err);
+              res.send(err);
+            }
+            stripe.accounts.createExternalAccount(
+              account.id,
+              {
+                external_account: token.id,
+              },
+              function(err, bank_account) {
+                if(err)
+                  res.send(err);
+                  console.log(bank_account);
+                  Task.storeBankInfo(req.body, function(err,Task){// calls the referral model function if name is not empty.
+                    if(err)
+                    res.send(err);
+                      res.send(Task);
+                  });
+              }
+            );
+          }
+        );
+
+
+        
+
+
+      }
+    );
+    }
 }
 
 exports.payout = function(req, res) {

@@ -67,6 +67,7 @@ async login() {
     // randy
     if (res  == true){
       // this.showAlert(res); //show in alert message box whetever result comes
+      localStorage.setItem('userLogin', this.username);
       this.showSuccess(res);
     }
 }, err => {
@@ -102,6 +103,7 @@ async showSuccess(msg){
       text: 'OK',
     handler: () => {
       this.nav.navigateForward('/dashboard');
+      
     }
   }
 ]
