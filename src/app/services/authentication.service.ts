@@ -13,6 +13,10 @@ const TOKEN_KEY = 'auth-token';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  public username: string;
+private messageSource = new BehaviorSubject(this.username);
+currentMessage = this.messageSource.asObservable();
+
   authenticationState = new BehaviorSubject(false);
   constructor(private storage: Storage,
      private plt: Platform,
@@ -24,6 +28,9 @@ export class AuthenticationService {
       this.checkToken();
     });
   }
+  changeMessage(username: string){
+    this.messageSource.next(username)
+}
   checkToken() {
     this.storage.get(TOKEN_KEY).then(res => {
       if (res) {
@@ -45,6 +52,7 @@ export class AuthenticationService {
    return this.http.post(SERVER_URL+'/login', user);
   }
 // post request for the referral page.
+
   refer( name: string, email : string, age: number, school : string): any{
     if(name == undefined || email == null || school == null){
       this.blankReferral();
@@ -58,6 +66,12 @@ export class AuthenticationService {
   emailChecker( email: string):any{
     let user = {"email" : email}
     return this.http.post(SERVER_URL+ '/referral', user);
+  }
+  //post request for the display page. takes the userid and other data points from the referral page.
+  display ( userid: string, name : string,  email : string, age : number, school : string): any{
+    let user2 = { "userid" : userid, "name" : name, "age": age, "email": email, "school": school}
+    console.log(user2);
+    return this.http.post(SERVER_URL+ '/display', user2);
   }
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
@@ -74,10 +88,15 @@ export class AuthenticationService {
     this.authenticationState.next(false);
   }); 
   }
+  // display(){
+  //   return this.storage.remove(TOKEN_KEY).then(()=> {
+  //   this.authenticationState.next(false);
+  //  });
+  // }
   isAuthenticated() {
     return this.authenticationState.value;
   }   
-
+ 
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Login Failed!',

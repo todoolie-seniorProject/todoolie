@@ -1,6 +1,7 @@
 var express = require('express');
 var controller = require('../controllers/userController'); // link to user controller
 var referralController = require('../controllers/referralController'); // link to referral controler
+var displayController = require('../controllers/displayController');
 var router = express.Router();
 
 /* GET home page. */
@@ -9,4 +10,5 @@ router.route('/login').post(controller.check_login_creds); // check username/pas
 
 router.route('/referral').get(referralController.ListAllreferrals); //get req to get all referrals
 router.route('/referral').post(referralController.createNewReferrals); //post req to add new referal
+router.route('/display').get(displayController.Displayreferrals);
 module.exports = router;

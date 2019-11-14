@@ -41,7 +41,9 @@
             <ion-label>school : </ion-label>
             <ion-input type = "text" require placeholder = "school" [(ngModel)]="school"></ion-input>
           </ion-item>
-        </ion-list> 
+      </ion-list>
         <div class="spacer" style="height:20px;"></div>
           <ion-button (click) = 'payment() ;refer()' expand = "block">Submit</ion-button>
-  </ion-content>
+          <ion-button (click) = 'display()' expand = "block">Display</ion-button>
+         <p> hello {{this.userid}}</p>
+        </ion-content>

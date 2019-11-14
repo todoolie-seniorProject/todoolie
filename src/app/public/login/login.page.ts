@@ -1,12 +1,12 @@
 import { AuthenticationService } from './../../services/authentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { NavController, ToastController, AlertController} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError, Subscription } from 'rxjs';
 import { Router, NavigationExtras } from '@angular/router';
-
+//import { MessageService } from '../../message.service'
 
 @Component({
   selector: 'app-login',
@@ -16,52 +16,27 @@ import { Router, NavigationExtras } from '@angular/router';
 
 export class LoginPage implements OnInit {
   authenticationState = new BehaviorSubject(false);
-  userInfo: { username: any[]; password: any[]; };
+  @Output() public userid = '55';
   public username: string;
-  public password: string;
-   todoolieUser = {
-    username: this.username,
-    password: this.password
-  }
+  public password: string ;
+
+  subscription: Subscription;
   constructor(private authService: AuthenticationService,
     private storage: Storage,
     private http: HttpClient,
     private nav: NavController,
     public toastController: ToastController,
     public alertCtrl: AlertController,
-    private router: Router
+    private router: Router,
+    //private data: MessageService
     ) { }
-
-   openDetailsWithState(){
-     let navigationExtras : NavigationExtras = {
-       state : {
-         todoolieUser: this.todoolieUser
-       }
-     };
-     this.router.navigate(['referral'],navigationExtras);
-      }
-    // setUsername(username){
-    //   this.username = username;
-    // }
-    // getUsername(){
-    //   return this.username;
-    // }
+  
   ngOnInit() {
+   this.authService.currentMessage.subscribe(userid => this.userid =userid);
   }
-//   async login() {
-//     this.authService.login(this.username, this.password).subscribe(res => {
-//      if(res.status==200){
-//        this.showAlert("successful")
-//        this.authService.setToken()
-//      } 
-//      else if (res.status==210){
-//        this.showAlert('error')
-//      }
-//   }, err => {
-//     throw err;
-//   });
-// }
-
+  sendUserid(){
+    this.authService.changeMessage(this.userid)
+  }
 async login() {
   this.authService.login(this.username, this.password).subscribe(res => {
     // randy
@@ -78,22 +53,6 @@ async login() {
 });
 }
 
-
-
-// login(username, password) {
-//   if ((this.username && this.password) === '' ) {
-//     // console.log(this.username);
-//     // console.log(this.password);
-//     let isAthorized = this.authService.login(this.username, this.password);
-//     // this.authService.login(this.username, this.password);
-//     console.log(isAthorized);
-//     // this.authService.postCreds(this.username, this.password);
-//   } else {
-//     this.authService.presentAlert();
-//     }
-// }
-
-// }
 async showSuccess(msg){
   const alert = await this.alertCtrl.create({
     header: 'Successful Login!',
@@ -117,5 +76,11 @@ async showSuccess(msg){
     await alert.present();
 
 }
+// async saveUsernameToFile() {
+//   var userInput = document.getElementById('username');
+//   var blob = new blob([userInput], {type: "text/plain;charset=utf-8"});
+//   saveAs(blob, "username.txt");
+//   console.log(this.username, "bird brain");
+// }
 
 }

@@ -39,7 +39,7 @@ Task.createReferral = function (body, result) {    // model function which will 
     if(emailValid == 1){
         result(null, "this email exist.");
     }
-    sql.query("INSERT INTO Referral (Refername, Age, Email, School) values (?,?,?,?)", [body.name, body.age, body.email, body.school ], function (err, res) {
+    sql.query("INSERT INTO Referral (userid, Refername, Age, Email, School) values (?,?,?,?,?)", [12,body.name, body.age, body.email, body.school ], function (err, res) {
             
             if(err) {
                 console.log("error: ", err); // iff error occurs, show

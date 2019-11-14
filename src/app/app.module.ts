@@ -12,9 +12,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule} from '@ionic/storage';
 import { AuthGuardService } from './guards/auth.guard';
 import { AuthenticationService } from './services/Authentication.service';
+import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent],schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [],
   imports: [BrowserModule, 
     IonicModule.forRoot(),

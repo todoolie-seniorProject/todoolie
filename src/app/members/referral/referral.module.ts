@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import {CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ReferralPage } from './referral.page';
 
@@ -21,6 +22,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ReferralPage]
+  declarations: [ReferralPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ReferralPageModule {}

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import {NavController, AlertController, ToastController } from '@ionic/angular';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import {NavController, AlertController, ToastController, Events } from '@ionic/angular';
+import { BehaviorSubject, Observable, throwError, Subscription } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SERVER_URL } from 'src/environments/environment';
 
 @Component({
   selector: 'app-referral',
@@ -14,27 +15,45 @@ import { Router } from '@angular/router';
   styleUrls: ['./referral.page.scss'],
 })
 export class ReferralPage implements OnInit {
-data: any;
-private showData;
+@Input() public userid;
 public name: string;
 public email: string;
 public age: number;
 public school: string;
-
+subscription: Subscription;
   constructor(private authService: AuthenticationService,
       public toastController: ToastController,
       public alertCtrl: AlertController,
       private nav: NavController,
-      private router: Router) {
+      private router: Router,
+      public events: Events,
+      //private data: MessageService,
+      ) {
    }
   ngOnInit() {
-    
+  this.authService.currentMessage.subscribe(userid => this.userid = userid)
   }
+ 
   referout(){
     this.authService.referout();
   }
   payment(){
     this.nav.navigateRoot('/admin');
+  }
+  async display(){
+    this.nav.navigateRoot('/display');
+
+    // this.authService.display(this.userid, this.name, this.email, this.age, this.school).subscribe(res =>{
+    //   if(res){
+    //     this.nav.navigateRoot('/display');
+    //   }
+    //   else{
+    //     console.log('error making request');
+    //     this.nav.navigateRoot('/referral');
+    //   }
+    // },err =>{
+    //   console.log(err);
+    // });
   }
 
   async refer() {
@@ -46,6 +65,7 @@ public school: string;
     }
     else{
       console.log('err bracket');
+    
       this.showAlertSuccess(res);
       this.nav.navigateForward('/admin');
     }
@@ -53,6 +73,7 @@ public school: string;
       console.log(err);
     });
   }
+  
   async showAlert(msg){
     const alert = await this.alertCtrl.create({
       header: 'Server Message',
@@ -78,4 +99,5 @@ async showAlertDuplicate(msg){
   });
   await alert.present();
 }
+
 }

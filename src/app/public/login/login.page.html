@@ -21,6 +21,7 @@
 
   
     <ion-item detail >
+        <app-referral [referralData]= "username"></app-referral>
       <ion-input  type="text" pattern="^[a-zA-Z\s']+$" required placeholder="Username" [(ngModel)]="username">
       </ion-input>
     </ion-item>
@@ -30,10 +31,10 @@
     <ion-item detail>
       <ion-input type="password" required placeholder="Password" [(ngModel)]="password"></ion-input>
     </ion-item>
-  
+   
 
   <div class="btn-wrapper">
-    <ion-button class="page-button1" (click)='login()' color="primary" expand="block">Login</ion-button>
+    <ion-button class="page-button1" (click)= 'login()' color="primary" expand="block">Login</ion-button>
 
 
     <div class="spacer" style="height:60px;"></div>
