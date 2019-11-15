@@ -19,6 +19,7 @@ router.route("/register_bank").post(stripeController.create_acc);
 router.route("/pp").get(stripeController.payout);
 router.route("/do").get(stripeController.do);
 router.route("/ext").get(stripeController.ext);
-router.route("/tra").get(stripeController.tra);
+router.route("/transaction").post(stripeController.transaction);
+router.route("/pay_referral").post(stripeController.pay_ref);
 
 module.exports = router;

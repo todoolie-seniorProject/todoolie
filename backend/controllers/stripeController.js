@@ -84,10 +84,13 @@ exports.create_acc = function(req, res) {
                 if(err)
                   res.send(err);
               
-                  Task.storeBankInfo(req.body, function(err,Task){// calls the referral model function if name is not empty.
-                    if(err)
-                    res.send(err);
-                    console.log(Task);
+                  Task.storeBankInfo(account, req.body, function(err,Task){// calls the referral model function if name is not empty.
+                    if(err) {
+                      console.log(err);
+                      res.send(err);
+                    }
+                      console.log(Task);
+
                       res.send(bank_account);
                   });
               }
@@ -188,7 +191,45 @@ exports.payTest = function(req, res){// funcition calling referral model functio
   }
 
 
- exports.tra = function(req, res) {
+exports.pay_ref = function(req, res) {
+  if(!req.body.email || !req.body.referby) 
+  {
+    res.send("missing parameters");
+  }
+  else {
+    Task.getReferralInfo(req.body, function(err, refRes) {
+      if(err) {
+        console.log(err);
+        res.send(err);
+      }
+      else {
+        if(refRes == 1) {
+          Task.getAcctNo(req.body, function(err, acctRes) {
+            if(err) {
+              console.log(err);
+              res.send(err);
+            }
+            else {
+              console.log(acctRes);
+              stripe.charges.create({
+                amount: 1000,
+                currency: "usd",
+                source: "tok_visa",
+                transfer_data: {
+                  destination:acctRes,
+                },
+              }).then(function(charge) {
+                res.send(charge);
+              });
+            }
+          })
+        }
+      }
+    })
+  }
+}
+
+ exports.transaction = function(req, res) {
 
   // stripe.accounts.update(
   //   'acct_1FdebzCOEcMMmyAO',
@@ -225,11 +266,11 @@ exports.payTest = function(req, res){// funcition calling referral model functio
     // );
 
     stripe.charges.create({
-      amount: 1000,
+      amount: req.body.amount,
       currency: "usd",
       source: "tok_visa",
       transfer_data: {
-        destination: "acct_1FdfWKErBhEC7rSG",
+        destination: req.body.acct,
       },
     }).then(function(charge) {
       res.send(charge);

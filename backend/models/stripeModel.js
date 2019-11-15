@@ -7,7 +7,35 @@ var Task = function(task){
     this.created_at = new Date();
 };
 
-Task.storeBankInfo = function (body, result) {
+Task.getAcctNo = function(body, result) {
+    sql.query("SELECT * FROM Users WHERE Username = ?", body.referby, function(err, res) {
+        if(err) {
+            console.log(err);
+            result(err, null);
+        }
+        else {
+            if(res.length > 0) {
+                result(null, res[0].AcctNo);
+            }
+        }
+    })
+}
+
+Task.getReferralInfo = function(body, result) {
+    sql.query("SELECT * FROM Referral WHERE Email = ? AND ReferBy = ?", [body.email, body.referby], function(err, res) {
+        if(err) {
+            console.log(err);
+            result(err, null);
+        }
+        else {
+            if(res.length > 0) {
+                result(null, 1);
+            }
+        }
+    })
+}
+
+Task.storeBankInfo = function (acct, body, result) {
     
     // model function which will actually insert ddata in referral table
     //the below is the query to insert data, it takes from name, age, email, and school and inputs into the db.
@@ -21,9 +49,15 @@ Task.storeBankInfo = function (body, result) {
             }
             else{
                 console.log(res);
-                result(null, "success"); //if no error occurs, show res which means response
+                sql.query("UPDATE Users SET AcctNo = ? WHERE Username = ?", [acct.id, body.username], function(err, res) {
+                    if(err)
+                        console.log(err);
+                    result(null, "successfully updated Acct no of User"); //if no error occurs, show res which means response
+
+                });
             }
         });           
 };
+
 
 module.exports= Task;

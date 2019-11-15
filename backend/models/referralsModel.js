@@ -43,7 +43,7 @@ Task.createReferral = function (body, result) {
     else {
     // model function which will actually insert ddata in referral table
     //the below is the query to insert data, it takes from name, age, email, and school and inputs into the db.
-    sql.query("INSERT INTO Referral (ReferBy, Refername, Age, Email, School) values (?,?,?,?,?)", [body.referby, body.name, body.age, body.email, body.school ], function (err, res) {
+    sql.query("INSERT INTO Referral (ReferBy, Refername, Age, Email, School, Status) values (?,?,?,?,?,0)", [body.referby, body.name, body.age, body.email, body.school ], function (err, res) {
             
             if(err) {
                 console.log("error: ", err); // iff error occurs, show
@@ -51,7 +51,7 @@ Task.createReferral = function (body, result) {
             }
             else{
                 console.log(res);
-                result(null, "success"); //if no error occurs, show res which means response
+                result(null, "successfully inserted referral"); //if no error occurs, show res which means response
             }
         });   
     }        
