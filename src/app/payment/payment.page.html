@@ -1,53 +1,58 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Todoolie Payment Page</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title padding center text-center>Todoolie Bank Info Page</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="spacer" style="height:20px;"></div>
-  
-      <div class="referPic">
-          <ion-img style="width: 312px; height:161px;" src='../../../assets/img/logo.png'></ion-img>
-        </div>
-      <div class="spacer" style="height:40px;"></div>
-      <ion-card>
-          <ion-card-header >
-            <ion-card-title style="text-align:center">Bank Details Form</ion-card-title>
-          </ion-card-header>
-            
-       
-        </ion-card>
-  <ion-list> 
-      <ion-item>
-          <ion-label>First Name : </ion-label>
-          <ion-input type = "text" require placeholder = "first name" [(ngModel)]="fname" ></ion-input>
-        </ion-item>
+<ion-content class = "page2">
+    <div class="spacer" style="height:20px;"></div>
+
+    <div class="referPic">
+        <ion-img style="width: 312px; height:161px;" src='../../../assets/img/logo.png'></ion-img>
+      </div>
+    <!-- <h1 id="page-heading1">
+      Welcome to ToDoolie!
+    </h1> -->
+    <div class="spacer" style="height:40px;"></div>
+    <ion-card>
+        <ion-card-header >
+          <ion-card-title style="text-align:center">Bank Details Form</ion-card-title>
+        </ion-card-header>
+          
+     
+      </ion-card>
+      <ion-list> 
         <ion-item>
-            <ion-label>Last Name : </ion-label>
-            <ion-input type = "text" require placeholder = "last name" [(ngModel)]="lname" ></ion-input>
+            <ion-label>First Name : </ion-label>
+            <ion-input type = "text" require placeholder = "first name" [(ngModel)]="fname" ></ion-input>
           </ion-item>
-   <ion-item>
-      <ion-label>Account Holder Name : </ion-label>
-      <ion-input type = "text" require placeholder = "name" [(ngModel)]="name" ></ion-input>
-    </ion-item>
-    <div class="spacer" style="height:2px;"></div>
-    <ion-item>
-        <ion-label>Email : </ion-label>
-        <ion-input type = "email" require placeholder = "email" [(ngModel)]="email"></ion-input>
+          <ion-item>
+              <ion-label>Last Name : </ion-label>
+              <ion-input type = "text" require placeholder = "last name" [(ngModel)]="lname" ></ion-input>
+            </ion-item>
+     <ion-item>
+        <ion-label>Account Holder Name : </ion-label>
+        <ion-input type = "text" require placeholder = "name" [(ngModel)]="name" ></ion-input>
       </ion-item>
       <div class="spacer" style="height:2px;"></div>
       <ion-item>
-          <ion-label>Routing Number : </ion-label>
-          <ion-input type = "text" require placeholder = "routing number" [(ngModel)]="routing"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Account Number : </ion-label>
-          <ion-input type = "text" require placeholder = "account number" [(ngModel)]="acc"></ion-input>
+          <ion-label>Email : </ion-label>
+          <ion-input type = "email" require placeholder = "email" [(ngModel)]="email"></ion-input>
         </ion-item>
         <div class="spacer" style="height:2px;"></div>
-        
-        </ion-list> 
-        <div class="spacer" style="height:20px;"></div>
-          <ion-button (click) = 'bank_info_submit();' expand = "block">Submit</ion-button>
+        <ion-item>
+            <ion-label>Routing Number : </ion-label>
+            <ion-input type = "text" require placeholder = "routing number" [(ngModel)]="routing"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Account Number : </ion-label>
+            <ion-input type = "text" require placeholder = "account number" [(ngModel)]="acc"></ion-input>
+          </ion-item>
+          <div class="spacer" style="height:2px;"></div>
+          
+          </ion-list> 
+          <div class="spacer" style="height:20px;"></div>
+            <ion-button (click) = 'bank_info_submit();' expand = "block" [disabled]="!isenabled">Submit</ion-button>
 </ion-content>
+
+

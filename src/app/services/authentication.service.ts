@@ -25,6 +25,14 @@ export class AuthenticationService {
     });
   }
 
+  checkBankAcc() { //call api to check account if already exist
+    if(localStorage.getItem('userLogin').length > 0) {
+      let user = {"username": localStorage.getItem('userLogin')};
+      return this.http.post(SERVER_URL+'/check_acc', user);
+    }
+  }
+
+  // call api to create bank account when user enters data in front end
   bankinfo( name: string, email : string, routingno: string, accountno : string, fname: string, lname: string): any {
     if(name == undefined || email == null || routingno == null || accountno == null){
       this.blankReferral();
