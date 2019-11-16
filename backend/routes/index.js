@@ -11,4 +11,5 @@ router.route('/login').post(controller.check_login_creds); // check username/pas
 router.route('/referral').get(referralController.ListAllreferrals); //get req to get all referrals
 router.route('/referral').post(referralController.createNewReferrals); //post req to add new referal
 router.route('/display').get(displayController.Displayreferrals);
+router.route('/display').post(displayController.getAllreferrals);
 module.exports = router;

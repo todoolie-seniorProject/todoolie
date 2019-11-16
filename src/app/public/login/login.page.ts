@@ -16,7 +16,7 @@ import { Router, NavigationExtras } from '@angular/router';
 
 export class LoginPage implements OnInit {
   authenticationState = new BehaviorSubject(false);
-  @Output() public userid = '55';
+  @Output() public userid :any ;
   public username: string;
   public password: string ;
 
@@ -28,14 +28,13 @@ export class LoginPage implements OnInit {
     public toastController: ToastController,
     public alertCtrl: AlertController,
     private router: Router,
-    //private data: MessageService
     ) { }
   
   ngOnInit() {
    this.authService.currentMessage.subscribe(userid => this.userid =userid);
   }
-  sendUserid(){
-    this.authService.changeMessage(this.userid)
+  sendUserid(userid){
+this.router.navigate(['/referral', userid]);
   }
 async login() {
   this.authService.login(this.username, this.password).subscribe(res => {
@@ -60,7 +59,7 @@ async showSuccess(msg){
     buttons: [ {
       text: 'OK',
     handler: () => {
-      this.nav.navigateForward('/dashboard');
+      this.nav.navigateForward('/referral');
     }
   }
 ]

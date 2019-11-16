@@ -45,5 +45,5 @@
         <div class="spacer" style="height:20px;"></div>
           <ion-button (click) = 'payment() ;refer()' expand = "block">Submit</ion-button>
           <ion-button (click) = 'display()' expand = "block">Display</ion-button>
-         <p> hello {{this.userid}}</p>
+         <p> hello {{userid | json }}</p>
         </ion-content>

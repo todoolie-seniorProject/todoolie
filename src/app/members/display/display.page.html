@@ -5,6 +5,12 @@
 </ion-header>
 
 <ion-content>
-<button type = "button">click here to see who you have refered</button>
-
+<div>
+<p>These are the students who you have referred!!</p>
+</div><div>
+  <ion-list>
+<pre id = "json"></pre>
+</ion-list>
+</div>
+<ion-button (click) =  'deleteName()' expand = "block">To delete a student click here</ion-button>
 </ion-content>

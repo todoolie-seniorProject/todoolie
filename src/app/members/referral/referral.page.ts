@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, throwError, Subscription } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SERVER_URL } from 'src/environments/environment';
 
 @Component({
@@ -15,7 +15,8 @@ import { SERVER_URL } from 'src/environments/environment';
   styleUrls: ['./referral.page.scss'],
 })
 export class ReferralPage implements OnInit {
-@Input() public userid;
+ userid : any;
+ data : any;
 public name: string;
 public email: string;
 public age: number;
@@ -27,13 +28,17 @@ subscription: Subscription;
       private nav: NavController,
       private router: Router,
       public events: Events,
+      private route: ActivatedRoute,
+      private http: HttpClient
       //private data: MessageService,
-      ) {
-   }
+      ) {}
   ngOnInit() {
-  this.authService.currentMessage.subscribe(userid => this.userid = userid)
-  }
- 
+  //this.authService.currentMessage.subscribe(userid => this.userid = userid)  
+ // this.sub = this.route.params.subscribe(params =>{
+  //  this.userid = params['userid'];
+ // });
+}
+
   referout(){
     this.authService.referout();
   }
@@ -42,18 +47,14 @@ subscription: Subscription;
   }
   async display(){
     this.nav.navigateRoot('/display');
-
-    // this.authService.display(this.userid, this.name, this.email, this.age, this.school).subscribe(res =>{
-    //   if(res){
-    //     this.nav.navigateRoot('/display');
-    //   }
-    //   else{
-    //     console.log('error making request');
-    //     this.nav.navigateRoot('/referral');
-    //   }
-    // },err =>{
-    //   console.log(err);
-    // });
+    this.http.get(SERVER_URL+ '/display').subscribe(data=>{
+      this.data = data;
+      var myJSON = JSON.stringify(data,null,'\t');
+      console.log( myJSON);
+      for(var i = 0; i<myJSON.length; i++){
+        document.getElementById("json").innerHTML = myJSON;
+      }
+    })
   }
 
   async refer() {

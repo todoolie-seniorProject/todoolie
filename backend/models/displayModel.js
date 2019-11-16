@@ -19,8 +19,9 @@ var Task = function(task){
 //         }
 //     });
 // };
+// api that gets all referrals specific to each user.
 Task.getAllreferrals = function(result){
-    sql.query("SELECT refername, age, email, school FROM Referral WHERE userid = 12 ", function(err,res){
+    sql.query("SELECT refername, age, email, school FROM Referral WHERE userid = 55 ", function(err,res){
         
         if(err){
             console.log("errror: ", err);
@@ -34,7 +35,7 @@ Task.getAllreferrals = function(result){
 };
 
 Task.getUserReferral = function(body,result){
-    sql.query("Select ?,?,?,? from Referral where userid = ?", body.name,body.age,body.email,body.school,body.userid, function(err,res){
+    sql.query("DELETE FROM Referral WHERE refername = ?", body.name, function(err,res){
         if(err){
             console.log("error: ", err);
             result(err,null);

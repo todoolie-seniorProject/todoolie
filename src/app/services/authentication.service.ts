@@ -7,14 +7,17 @@ import { catchError, retry } from 'rxjs/operators';
 import { environment, SERVER_URL } from '../../environments/environment';
 import {NavController, AlertController} from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 const TOKEN_KEY = 'auth-token';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  public username: string;
-private messageSource = new BehaviorSubject(this.username);
+   userid:any;
+   data:any;
+private messageSource = new BehaviorSubject('default message');
 currentMessage = this.messageSource.asObservable();
 
   authenticationState = new BehaviorSubject(false);
@@ -22,14 +25,15 @@ currentMessage = this.messageSource.asObservable();
      private plt: Platform,
       private http: HttpClient,
       public alertController: AlertController,
+      private router: Router,
       private nav: NavController
       ) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
   }
-  changeMessage(username: string){
-    this.messageSource.next(username)
+  changeMessage(userid: string){
+    this.messageSource.next(userid)
 }
   checkToken() {
     this.storage.get(TOKEN_KEY).then(res => {
@@ -44,6 +48,16 @@ currentMessage = this.messageSource.asObservable();
      let isAthorized = this.authenticationState.getValue();
    });
   }
+  showReferral(){
+    this.http.get(SERVER_URL+ '/display').subscribe(data=>{
+      this.data = data;
+      var myJSON = JSON.stringify(data,null,'\t');
+      console.log( myJSON);
+      for(var i = 0; i<myJSON.length; i++){
+        document.getElementById("json").innerHTML = myJSON;
+      }
+    })
+  }
   // post request for the login page.
   login(username: string, password: string): any {
     
@@ -52,7 +66,10 @@ currentMessage = this.messageSource.asObservable();
    return this.http.post(SERVER_URL+'/login', user);
   }
 // post request for the referral page.
-
+  deleteReferral(name: string ): any{
+    let user2 = {"name": name}
+    return this.http.post(SERVER_URL+ '/display', user2);
+  }
   refer( name: string, email : string, age: number, school : string): any{
     if(name == undefined || email == null || school == null){
       this.blankReferral();
@@ -72,6 +89,9 @@ currentMessage = this.messageSource.asObservable();
     let user2 = { "userid" : userid, "name" : name, "age": age, "email": email, "school": school}
     console.log(user2);
     return this.http.post(SERVER_URL+ '/display', user2);
+    this.router.navigate(['/display', user2]);
+    this.nav.navigateRoot('display');
+    
   }
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
