@@ -37,12 +37,30 @@ export class AdminPage implements OnInit {
       this.authService.logout();
     }
    async showAlert(){
-      const alert = await this.alertCtrl.create({
-        header: 'Stripe Payment',
-        message: 'Please input your payment information!',
-        buttons: ['OK'],
-      });
-      await alert.present();
+      this.authService.checkBankAcc().subscribe(data => { 
+        if(data['res'] == 1) { 
+          // if bank account already exist, show message that already exist and take it to dashboard
+          this.showAlreadyAlert();
+        }
+        else {
+          this.nav.navigateForward('/payment'); // otherwise take to payment page
+        }
+     });
+   }
+
+   async showAlreadyAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Server Message',
+      message: 'You already have bank info stored!',
+      buttons: [ {
+        text: 'OK',
+      handler: () => {
+        this.nav.navigateForward('/dashboard');
+      }
     }
+  ]
+    });
+    await alert.present();
+  }
 
 }

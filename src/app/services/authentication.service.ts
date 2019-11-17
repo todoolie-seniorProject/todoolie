@@ -25,6 +25,27 @@ export class AuthenticationService {
       this.checkToken();
     });
   }
+
+  checkBankAcc() { //call api to check account if already exist
+    if(localStorage.getItem('userLogin').length > 0) {
+      let user = {"username": localStorage.getItem('userLogin')};
+      return this.http.post(SERVER_URL+'/check_acc', user);
+    }
+  }
+
+  // call api to create bank account when user enters data in front end
+  bankinfo( name: string, email : string, routingno: string, accountno : string, fname: string, lname: string): any {
+    if(name == undefined || email == null || routingno == null || accountno == null){
+      this.blankReferral();
+      this.nav.navigateRoot('payment');
+    }
+    else {
+      let user = { "name" : name, "routing_no": routingno, "account_no": accountno, "email": email, "fname": fname, "lname": lname, "username": localStorage.getItem('userLogin')}
+      console.log(user);
+      return this.http.post(SERVER_URL+'/register_bank', user);
+    }
+  } 
+
   checkToken() {
     this.storage.get(TOKEN_KEY).then(res => {
       if (res) {
@@ -51,7 +72,7 @@ export class AuthenticationService {
       this.nav.navigateRoot('referral');
     }
     else {
-  let user ={ "name" : name, "age": age, "email": email, "school": school}
+  let user ={ "name" : name, "age": age, "email": email, "school": school, "referby": localStorage.getItem('userLogin')}
   console.log(user);
   return this.http.post(SERVER_URL + '/referral', user);
 
@@ -59,6 +80,7 @@ export class AuthenticationService {
 
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
+      localStorage.setItem('userLogin', null);
       this.authenticationState.next(false);
     });
   }

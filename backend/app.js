@@ -5,8 +5,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
+<<<<<<< HEAD
 const details = require("./details.json");
 const nodemailer =require("nodemailer");
+=======
+>>>>>>> fariha2
 const bodyParser = require('body-parser');
 
 

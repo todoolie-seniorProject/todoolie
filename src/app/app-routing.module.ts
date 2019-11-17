@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', loadChildren: './public/login/login.module#LoginPageModule' },
+  
+  //{ path: 'login', loadChildren: './payment/payment.module#PaymentPageModule' },
   { path: 'dashboard', loadChildren: './members/dashboard/dashboard.module#DashboardPageModule' },
   {
     path: 'members',
@@ -13,6 +15,8 @@ const routes: Routes = [
   },
   { path: 'admin', loadChildren: './members/admin/admin.module#AdminPageModule' },
   { path: 'referral', loadChildren: './members/referral/referral.module#ReferralPageModule' },
+  { path: 'payment', loadChildren: './payment/payment.module#PaymentPageModule' },
+
 ];
 
 @NgModule({

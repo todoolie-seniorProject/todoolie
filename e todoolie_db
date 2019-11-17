@@ -1,0 +1,131 @@
+[33mcommit af9cf576fbc85b7d271566c285528595a743527a[m[33m ([m[1;36mHEAD -> [m[1;32mfariha2[m[33m)[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Wed Nov 13 13:01:07 2019 -0500
+
+    fixed front-end issues related to payment page and message popups and navigation
+
+[33mcommit 27ede680aff9ba3705ac919b7de34149b54d790f[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Wed Nov 13 12:18:34 2019 -0500
+
+    fixed front end issues, created new table and apis for storing bank info in database and error handling
+
+[33mcommit f2b29284134979a7d54de44b4db93937163c2176[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Wed Nov 13 10:36:27 2019 -0500
+
+    added payment front-end screen and make bank account api work with frontend
+
+[33mcommit 0a5bf3f311d1c94a67ade5358dfa6425e6d16343[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Tue Nov 12 11:32:09 2019 -0500
+
+    made further apis for testing for stripe
+
+[33mcommit 1428df1d5f945edbeae04684922c6010141aacf5[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Sat Nov 9 13:34:58 2019 -0500
+
+    Added listing customer API and charged customer API
+
+[33mcommit d4bb8cf133fcd98d868ad6dc94e8da252f0b567c[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Thu Nov 7 11:44:33 2019 -0500
+
+    added stripe to project for testing
+
+[33mcommit 97ccce0cb48136d912116703b9a8b4574fd41368[m[33m ([m[1;31morigin/fariha2[m[33m)[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Sun Nov 3 11:07:55 2019 -0500
+
+    Merged latest front-end updates
+
+[33mcommit eaa36f5747337a9159c2a8669e70628c3e5358f9[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Sat Nov 2 08:40:56 2019 -0400
+
+    Added email validation
+
+[33mcommit bc49238b7ef96409df7d477ba3a83ffb5ff9556b[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Sat Nov 2 08:19:01 2019 -0400
+
+    Merged front-end and backend with latest changes
+
+[33mcommit ad93138615fb4fbe16efbd865155a242a6079f96[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Sat Nov 2 07:56:31 2019 -0400
+
+    Merging backend work to remove conflicts
+
+[33mcommit b1d63f2f38cd84dcad7dc27f2627cab95a1c9da1[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Fri Oct 25 15:21:05 2019 -0400
+
+    added check for unqiue leads in my api
+
+[33mcommit 1a8ea61d912ccdc6b954ae5588df1e48940b5903[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Thu Oct 24 12:14:13 2019 -0400
+
+    fixing conflict
+
+[33mcommit fa83f41218e3654e44a830c39084c0920da862df[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Wed Oct 23 11:57:12 2019 -0400
+
+    added edit/delete apis for referrals
+
+[33mcommit 7b2edca8fef5742399d8da808fb810624ffabead[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Tue Oct 22 17:08:03 2019 -0400
+
+    Added comments to changes in frontend
+
+[33mcommit c62449d9542f1d25e53c8db54ac58b639f2f7765[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Tue Oct 22 13:27:29 2019 -0400
+
+    updated app.js
+
+[33mcommit 280ec56c94d436aa2896353da481f7e2983b7846[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Tue Oct 22 13:26:17 2019 -0400
+
+    merged backend with master
+
+[33mcommit f84c0427761ed0f7e586cd480c71755d23d2ec76[m
+Author: fariha <fp5975@wayne.edu>
+Date:   Tue Oct 22 13:15:51 2019 -0400
+
+    connected front-end with back-end
+
+[33mcommit fb75654e6cacffc22c0aa7ad280e2532e61a03b0[m
+Author: monawar <ft0920@gmail.com>
+Date:   Thu Oct 17 17:48:35 2019 -0400
+
+    post Request made for login
+
+[33mcommit a61be72ba30b0f4e5684141ec084ddacceff9133[m
+Author: monawar <ft0920@gmail.com>
+Date:   Fri Oct 11 00:22:51 2019 -0400
+
+    referral page
+
+[33mcommit 260af1fe8d69cdffa96b98143e67affa50ccceba[m
+Author: monawar <ft0920@wayne.edu>
+Date:   Tue Oct 1 01:19:57 2019 -0400
+
+    prototype1
+
+[33mcommit 645a397aace5f2c83ea2842ccdb234dd516b38fa[m
+Author: Unknown <em8878@wayne.edu>
+Date:   Thu Sep 26 18:39:15 2019 -0400
+
+    Randys UI and angular routers
+
+[33mcommit 53e922b77ec1f7322275d87d4037ba81ce45e94d[m
+Author: Unknown <em8878@wayne.edu>
+Date:   Thu Sep 26 18:36:51 2019 -0400
+
+    Initial commit
