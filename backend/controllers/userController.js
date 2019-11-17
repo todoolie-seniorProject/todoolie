@@ -22,10 +22,6 @@ exports.check_login_creds = function(req, res) {
       if (err)
         res.send(err);
       else if (task.length > 0) {
-<<<<<<< HEAD
-        console.log("Login Successful!");
-=======
->>>>>>> master
             res.send(true);
 
         }

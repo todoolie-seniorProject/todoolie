@@ -11,10 +11,7 @@ const routes: Routes = [
     path: 'members',
     loadChildren: './members/member-routing.module#MemberRoutingModule'
   },
-<<<<<<< HEAD
-=======
   { path: 'admin', loadChildren: './members/admin/admin.module#AdminPageModule' },
->>>>>>> master
   { path: 'referral', loadChildren: './members/referral/referral.module#ReferralPageModule' },
 ];
 

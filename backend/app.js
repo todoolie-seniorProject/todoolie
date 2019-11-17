@@ -1,88 +1,21 @@
 var createError = require('http-errors');
 var express = require('express');
+var cors = require('cors')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
+const details = require("./details.json");
+const nodemailer =require("nodemailer");
 const bodyParser = require('body-parser');
 
-const port = 3000
+
 var app = express();
-
-const routes = {
-  login: require('./routes/index'), 
-}
-
-let APIS = {
-  mobile: express(),
-}
-
-APIS.mobile.use(bodyParser.json());
-APIS.mobile.use(bodyParser.urlencoded({ extended: true }));
-
-//  ENABLE CORS
-const corsOptions = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT,DELETE",
-  "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-}
-
-//set cors for main app
-app.use((req, res, next) => {
-  Object.keys(corsOptions).forEach(function (key) {
-    res.setHeader(key, corsOptions[key])
-  });
-  next();
-});
-
-//Set cors for all sub apis
-Object.keys(APIS).forEach(function (key) {
-  APIS[key].use((req, res, next) => {
-    Object.keys(corsOptions).forEach(function (key) {
-      res.setHeader(key, corsOptions[key])
-    });
-    next();
-  });
-});
-
-Object.keys(routes).forEach(function (key) {
-  let ROUTE = routes[key];
-  // route string is the routes key without 'Route'. EX: signinRoute -> /api/signin
-  let routeStr = "/" + key.substr(0, key.length - 6)
-  APIS.mobile.use(routeStr, ROUTE);
-});
-
-APIS.mobile.use((req, res, next) => {
-  const error = new Error('Page Not Found');
-  error.status = 404;
-  next(error);
-})
-
-APIS.mobile.use((error, req, res, next) => { //error handling middleware
-  console.log(colors.red(figures.cross, ' 500: '), error.message);
-  res.status(error.status || 500);
-  res.json({
-    error: {
-      message: error.message
-    }
-  });
-});
-
-// mount all sub apis in subdirs
-Object.keys(APIS).forEach(function (key) {
-  app.use("/"+key, APIS[key])
-});
-
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-<<<<<<< HEAD
-=======
  var originsWhitelist = [
   'http://localhost:4200' //allowing requests from this website, which is our front-end
  
@@ -97,7 +30,59 @@ var corsOptions = {
 //here is the magic
 app.use(cors(corsOptions));
 
->>>>>>> master
+//middleware parse
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+//tells console to listen on port 
+app.listen(3000, () => {
+  console.log("The server started on port 3000 !!!!!!");
+});
+
+
+//endpoint for the email sent from frontend
+app.post("/sendmail", (req, res) => {
+  console.log("request came");
+  console.log(req.body);
+  let user = req.body;
+  sendMail(user, info => {
+    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+    res.send(info);
+  });
+});
+
+async function sendMail(user, callback) {
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: 'tranrandy23@gmail.com ',
+      pass: 'naynay1993'
+    }
+  });
+
+  
+  let mailOptions = {
+    from: '"ToDoolie"<example.gmail.com>', // sender address
+    to: user.email, // list of receivers
+    subject: "Wellcome to ToDoolie!!", // Subject line
+    html: `<h1>Hi ${user.name}</h1><br>
+    <h3>We appreciate your interest in joining our team and look forward to meeting with you!
+       To join our platform, visit us at <a href="https://todoolie.com/studentsignup/">Be A ToDoolie Helper</a> 
+       if you have not registered yet. 
+       Please contact us at (313) 777-8052 for more information. </h3>`
+  };
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail(mailOptions);
+
+  callback(info);
+}
+
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -123,5 +108,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(port, () => console.log(`Listening on port... ${port}!`))
+
 module.exports = app;

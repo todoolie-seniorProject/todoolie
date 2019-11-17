@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-referral',
   templateUrl: './referral.page.html',
@@ -19,45 +20,27 @@ public name: string;
 public email: string;
 public age: number;
 public school: string;
-<<<<<<< HEAD
-
-  constructor(private authService: AuthenticationService,
-      public toastController: ToastController,
-      public alertCtrl: AlertController) {
-
-=======
 
   constructor(private authService: AuthenticationService,
       public toastController: ToastController,
       public alertCtrl: AlertController,
+      private http: HttpClient,
       private nav: NavController) {
-   
->>>>>>> master
+
    }
   ngOnInit() {
-    
+
   }
-  referout(){
+  referout() {
     this.authService.referout();
   }
-  payment(){
+  payment() {
     this.nav.navigateRoot('/admin');
   }
 
   async checkEmail() {
     
   }
-<<<<<<< HEAD
-  referout(){
-    this.authService.referout();
-  }
-  async refer() {
-    this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
-      this.showAlert(res);
-  }, err => {
-    this.showAlert(err.error.text);
-  });
-=======
 
   async refer() {
     // the regex that checks the input email if its in format and is a valid email
@@ -67,53 +50,87 @@ public school: string;
       this.nav.navigateBack('/referral'); // stay on referral page if email is invalid
     }
     else { // if email is valid then this will run
-      this.authService.refer(this.name, this.email,this.age, this.school).subscribe(res => {
-        if(res.hasOwnProperty('code')) {
+      this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
+        if (res.hasOwnProperty('code')) {
           this.showAlert("The email already exists with this email! ");
           this.nav.navigateBack('/referral');
         }
-        else {
-        console.log(res);//fariha
+        else{
+        console.log(res); //fariha
         this.showAlertSuccess(res);
+        this.authService.sendMail(this.name, this.email, this.age, this.school);
           this.nav.navigateForward('/admin'); //temporary remove
         }
-    
+
       }, err => {
-        console.log(err); //f
+        console.log(err); //
       });
     }
->>>>>>> master
   }
-  async showAlert(msg){
+
+  // async refer() {
+  //   this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
+  //     this.showAlertSuccess(res);
+  //     this.authService.sendMail(this.name, this.email, this.age, this.school);
+  // }, err => {
+  //   this.showAlert(err.error.text);
+  // });
+  // }
+
+
+  async showAlert(msg) {
     const alert = await this.alertCtrl.create({
       header: 'Server Message',
-<<<<<<< HEAD
-      message: 'succesfull referral',
-=======
       message: msg,
->>>>>>> master
       buttons: ['OK']
     });
     await alert.present();
 
 }
-<<<<<<< HEAD
-=======
 async showAlertSuccess(msg){
   const alert = await this.alertCtrl.create({
-    header: 'Successfull Referrral!',
+    header: 'Successful Referral!',
     buttons: ['OK']
   });
   await alert.present();
 }
 
+// sendmail function for referral
+async sendMail() {
+  this.authService.sendMail(this.name, this.email, this.age, this.school).subscribe(res => {
+    console.log('email sent!');
+}, err => {
+  this.showAlert(err.error.text);
+});
+}
+
+
+
+
+
+
+// sendMail function
+// sendMail( name: string, email: string, age: number, school: string): any {
+//   const user = { "name" : name, "age": age, "email": email, "school": school}
+//   this.http.post('http://localhost:3000/sendmail', user).subscribe(
+//     data => {
+//       const res: any = data;
+//       console.log(
+//         `👏 > 👏 > 👏 > 👏 ${user.name} is successfully register and mail has been sent and the message id is ${res.messageId}`
+//       );
+//     },
+//     err => {
+//       console.log(err);
+//       console.log("failed to send email to student referral")
+//     }
+//   );
+// }
 
 
 clear(){
-  this.name='';
-  this.email='';
-  this.school='';
-  this.age= null;
+  this.name = '';
+  this.email = '';
+  this.school = '';
+  this.age = null;
 }
->>>>>>> master
 }

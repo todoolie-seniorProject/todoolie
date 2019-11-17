@@ -10,32 +10,18 @@ var Task = function(task){
 };
 
 Task.getAllreferrals = function (result) {
-<<<<<<< HEAD
-    sql.query("SELECT * from Referral", function (err, res) {
-=======
     sql.query("SELECT * from Referral", function (err, res) {//sql qurey to request all referrals in the db.
->>>>>>> master
 
             if(err) {
                 console.log("error: ", err);
                 result(null, err);
             }
             else{
-<<<<<<< HEAD
-                console.log('tasks : ', res);  
-=======
                 console.log('tasks : ', res,'\n');  
->>>>>>> master
                 result(null, res);
             }
         });   
 };
-<<<<<<< HEAD
-Task.createReferral = function (body, result) {    // model function which will actually insert data in referral table
-    //the below is the query to insert data, it takes from user the username and rollnum and set status 0 as in start
-    //the status of the referral will be 0, it will later be changed on verification
-    sql.query("INSERT INTO Referral (Referfriend, Age, Email, School) values (?,?,?,?)", [body.name, body.age, body.email, body.school ], function (err, res) {
-=======
 Task.createReferral = function (body, result) {
     var emailValid = 0;
     sql.query("select * from Referral where Email = ?", body.email, function(err, res) {
@@ -43,11 +29,11 @@ Task.createReferral = function (body, result) {
             console.log("error: ", err); // iff error occurs, show
             result(err, null); 
         }
-        else {
-            if(res.length > 0) {
-                emailValid = 1;
-            }
-        }
+        // else {
+        //     if(res.length > 0) {
+        //         emailValid = 1;
+        //     }
+        // }
     });
 
     if(emailValid == 1) {
@@ -56,7 +42,6 @@ Task.createReferral = function (body, result) {
     // model function which will actually insert ddata in referral table
     //the below is the query to insert data, it takes from name, age, email, and school and inputs into the db.
     sql.query("INSERT INTO Referral (Refername, Age, Email, School) values (?,?,?,?)", [body.name, body.age, body.email, body.school ], function (err, res) {
->>>>>>> master
             
             if(err) {
                 console.log("error: ", err); // iff error occurs, show
@@ -110,8 +95,6 @@ Task.getDistinctreferrals = function (result) {
 
 
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -205,5 +188,4 @@ Task.getDistinctreferrals = function (result) {
 //             }
 //         });           
 // };
->>>>>>> master
 module.exports= Task;
