@@ -5,7 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
-const details = require("./details.json");
+// const details = require("./details.json");
 const nodemailer =require("nodemailer");
 const bodyParser = require('body-parser');
 
@@ -58,8 +58,8 @@ async function sendMail(user, callback) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'tranrandy23@gmail.com ',
-      pass: 'naynay1993'
+      user: 'test.todoolie@gmail.com ',
+      pass: 'WayneState@'
     }
   });
 

@@ -1,0 +1,31 @@
+.btn-wrapper{
+    padding-top: 1em;
+    text-align: center;
+}
+
+
+.displayPage{
+    --background: url('../../../assets/img/BeginBG.jpeg') 0 0/100% 100% no-repeat;
+}
+.page-heading1{
+    color: #f26522; text-align:center;
+}
+
+.referPic{ max-width: 500px;  width: 50%;  margin: 0 auto; display:block;}
+
+.list .item {
+    background-color:  #f26522;
+    border-width: 1px;
+    border-style: ridge;
+    border-color: #C0C0C0;
+  }
+
+
+ion-card {
+    --padding-top:20px;
+    --padding-bottom:20px;
+  --position: relative;
+  --text-align: center;
+//   --background: white;
+  --background: rgba(255, 255, 255, 0.5);
+}

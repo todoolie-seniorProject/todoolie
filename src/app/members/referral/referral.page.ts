@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { SERVER_URL } from 'src/environments/environment';
 
 
 @Component({
@@ -20,6 +21,7 @@ public name: string;
 public email: string;
 public age: number;
 public school: string;
+data: any;
 
   constructor(private authService: AuthenticationService,
       public toastController: ToastController,
@@ -78,9 +80,24 @@ public school: string;
   // }
 
 
+  async display() {
+    this.nav.navigateRoot('/display');
+    this.http.get(SERVER_URL+ '/display').subscribe(data=>{
+      this.data = data;
+      var myJSON = JSON.stringify(data,null,'\t');
+      console.log( myJSON);
+      for(var i = 0; i<myJSON.length; i++){
+        document.getElementById("json").innerHTML = myJSON;
+      }
+    })
+  }
+
+
+
+
   async showAlert(msg) {
     const alert = await this.alertCtrl.create({
-      header: 'Server Message',
+      header: 'Error!',   // show error alert instead of server message
       message: msg,
       buttons: ['OK']
     });
@@ -107,27 +124,7 @@ async sendMail() {
 
 
 
-
-
-// sendMail function
-// sendMail( name: string, email: string, age: number, school: string): any {
-//   const user = { "name" : name, "age": age, "email": email, "school": school}
-//   this.http.post('http://localhost:3000/sendmail', user).subscribe(
-//     data => {
-//       const res: any = data;
-//       console.log(
-//         `👏 > 👏 > 👏 > 👏 ${user.name} is successfully register and mail has been sent and the message id is ${res.messageId}`
-//       );
-//     },
-//     err => {
-//       console.log(err);
-//       console.log("failed to send email to student referral")
-//     }
-//   );
-// }
-
-
-clear(){
+clear() {
   this.name = '';
   this.email = '';
   this.school = '';

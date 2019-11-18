@@ -57,13 +57,18 @@ async login() {
     // randy
     if (res  == true){
       // this.showAlert(res); //show in alert message box whetever result comes
+      localStorage.setItem('userLogin', this.username);
       this.showSuccess(res);
+    }
+    else {
+      this.showAlert(res);     // wrong username or password
+      this.nav.navigateBack('login');
     }
 }, err => {
   {
   // shows alert that the username and password is incorrect
-  this.showAlert(err.error.text);
-  this.nav.navigateBack('login');
+  this.showAlert(err.text);
+  //this.nav.navigateBack('login');
   }
 });
 }
@@ -77,6 +82,7 @@ async showSuccess(msg){
       text: 'OK',
     handler: () => {
       this.nav.navigateForward('/dashboard');
+      
     }
   }
 ]

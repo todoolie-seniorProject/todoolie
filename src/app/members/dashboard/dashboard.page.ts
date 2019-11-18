@@ -18,6 +18,7 @@ export class DashboardPage implements OnInit {
     public toastController: ToastController,
     public alertCtrl: AlertController) { }
   ngOnInit() {
+
   }
 
   logout() {
