@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'admin', loadChildren: './members/admin/admin.module#AdminPageModule' },
   { path: 'referral', loadChildren: './members/referral/referral.module#ReferralPageModule' },
   { path: 'payment', loadChildren: './payment/payment.module#PaymentPageModule' },
+  { path: 'display', loadChildren: './members/display/display.module#DisplayPageModule' },
 
 ];
 

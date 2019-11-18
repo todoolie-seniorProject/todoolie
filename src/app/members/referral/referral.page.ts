@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { SERVER_URL } from 'src/environments/environment';
 
 
 @Component({
@@ -20,6 +21,7 @@ public name: string;
 public email: string;
 public age: number;
 public school: string;
+data: any;
 
   constructor(private authService: AuthenticationService,
       public toastController: ToastController,
@@ -76,6 +78,21 @@ public school: string;
   //   this.showAlert(err.error.text);
   // });
   // }
+
+
+  async display() {
+    this.nav.navigateRoot('/display');
+    this.http.get(SERVER_URL+ '/display').subscribe(data=>{
+      this.data = data;
+      var myJSON = JSON.stringify(data,null,'\t');
+      console.log( myJSON);
+      for(var i = 0; i<myJSON.length; i++){
+        document.getElementById("json").innerHTML = myJSON;
+      }
+    })
+  }
+
+
 
 
   async showAlert(msg) {
