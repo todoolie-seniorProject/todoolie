@@ -69,14 +69,40 @@ export class DashboardPage implements OnInit {
 
   goDash() {
     //location.reload(); //refresh current page;
-    this.rout.navigateByUrl('/dashboard');
+    this.rout.navigateByUrl('/admin');
+  }
+
+  async showNoBank() {
+    const alert = await this.alertCtrl.create({
+      header: 'Server Message',
+      message: 'You dont have bank info stored!',
+      buttons: [ {
+        text: 'OK',
+      handler: () => {
+        this.rout.navigateByUrl('/dashboard');
+      }
+    }
+  ]
+    });
+    await alert.present();
   }
 
   getPaid(email: string) { //function to call pay_referral api to get paid for that referral with that email
-    this.authService.getPaid(email).subscribe(data => {
-      this.showSuccessAlert("Successfully sent request to get paid!");
-      this.rout.navigateByUrl('/dashboard');
-    })
+
+    this.authService.checkBankAcc().subscribe(data => { 
+      if(data['res'] != 1) { 
+        // if bank account already exist, show message that already exist and take it to dashboard
+        this.showNoBank();
+      }
+      else {
+        this.authService.getPaid(email).subscribe(data => {
+          this.showSuccessAlert("Successfully sent request to get paid!");
+          this.rout.navigateByUrl('/admin');
+        });
+      }
+   });
+
+    
   }
 
   ionViewWillEnter() { //this function refreshes referrals on dashboard each time page loads
@@ -94,7 +120,7 @@ export class DashboardPage implements OnInit {
       buttons: [ {
         text: 'OK',
       handler: () => {
-        this.rout.navigateByUrl('/dashboard');
+        this.rout.navigateByUrl('/admin');
       }
     }
   ]

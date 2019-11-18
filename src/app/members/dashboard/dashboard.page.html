@@ -81,7 +81,7 @@
 
                 <ion-col>
                   <!-- if referral is unpaid, means status is 0, then make a button to get paid-->
-                    <span *ngIf="item.Status == 0"><ion-button id="page-button1" (click)='getPaid(item.Email); goDash();' color="primary" expand="block">Get Paid</ion-button></span>
+                    <span *ngIf="item.Status == 0"><ion-button id="page-button1" (click)='getPaid(item.Email);' color="primary" expand="block">Get Paid</ion-button></span>
                     <p *ngIf="item.Status == 1">You already got paid!</p> <!--  if referral is already paid, dont make button-->
                 </ion-col>
               </ion-row>

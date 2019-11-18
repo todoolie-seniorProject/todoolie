@@ -6,6 +6,7 @@ import { NavController, ToastController, AlertController} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { SERVER_URL } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +20,8 @@ export class AdminPage implements OnInit {
     public toastController: ToastController,
     public alertCtrl: AlertController,
     private nav: NavController,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private rout: Router) { }
 
   ngOnInit() {
   }
@@ -37,15 +39,7 @@ export class AdminPage implements OnInit {
       this.authService.logout();
     }
    async showAlert(){
-      this.authService.checkBankAcc().subscribe(data => { 
-        if(data['res'] == 1) { 
-          // if bank account already exist, show message that already exist and take it to dashboard
-          this.showAlreadyAlert();
-        }
-        else {
-          this.nav.navigateForward('/payment'); // otherwise take to payment page
-        }
-     });
+      this.rout.navigateByUrl('/dashboard');
    }
 
    async showAlreadyAlert() {
@@ -55,7 +49,7 @@ export class AdminPage implements OnInit {
       buttons: [ {
         text: 'OK',
       handler: () => {
-        this.nav.navigateForward('/dashboard');
+        this.rout.navigateByUrl('/dashboard');
       }
     }
   ]

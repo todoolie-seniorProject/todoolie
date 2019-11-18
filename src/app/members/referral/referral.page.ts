@@ -111,7 +111,7 @@ async showAlertSuccess(msg){
     buttons: [ {
       text: 'OK',
     handler: () => {
-      this.nav.navigateForward('/dashboard');
+      this.rout.navigateByUrl('/dashboard');
     }
   }
 ]
