@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { SERVER_URL } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,7 +28,8 @@ data: any;
       public toastController: ToastController,
       public alertCtrl: AlertController,
       private http: HttpClient,
-      private nav: NavController) {
+      private nav: NavController
+      ,private rout: Router) {
 
    }
   ngOnInit() {
@@ -37,7 +39,8 @@ data: any;
     this.authService.referout();
   }
   payment() {
-    this.nav.navigateRoot('/admin');
+    this.rout.navigateByUrl('/dashboard');
+    
   }
 
   async checkEmail() {
@@ -55,13 +58,11 @@ data: any;
       this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
         if (res.hasOwnProperty('code')) {
           this.showAlert("The email already exists with this email! ");
-          this.nav.navigateBack('/referral');
         }
         else{
-        console.log(res); //fariha
-        this.showAlertSuccess(res);
-        this.authService.sendMail(this.name, this.email, this.age, this.school);
-          this.nav.navigateForward('/admin'); //temporary remove
+          console.log(res); //fariha
+          //this.authService.sendMail(this.name, this.email, this.age, this.school);
+          //this.sendMail();
         }
 
       }, err => {
@@ -107,7 +108,13 @@ data: any;
 async showAlertSuccess(msg){
   const alert = await this.alertCtrl.create({
     header: 'Successful Referral!',
-    buttons: ['OK']
+    buttons: [ {
+      text: 'OK',
+    handler: () => {
+      this.rout.navigateByUrl('/dashboard');
+    }
+  }
+]
   });
   await alert.present();
 }
@@ -116,6 +123,7 @@ async showAlertSuccess(msg){
 async sendMail() {
   this.authService.sendMail(this.name, this.email, this.age, this.school).subscribe(res => {
     console.log('email sent!');
+    
 }, err => {
   this.showAlert(err.error.text);
 });

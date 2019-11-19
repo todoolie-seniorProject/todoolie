@@ -67,6 +67,11 @@ export class AuthenticationService {
    console.log(user);
    return this.http.post(SERVER_URL + '/login', user);
   }
+  getPaid(email:string): any {
+    let user = {"email": email, "referby": localStorage.getItem('userLogin')};
+    console.log(user);
+    return this.http.post(SERVER_URL + '/pay_referral', user);
+   }
 // post request for the referral page.
   refer( name: string, email : string, age: number, school : string): any{
     if(name == undefined || email == null || school == null){
@@ -122,6 +127,11 @@ export class AuthenticationService {
     let user2 = { "user" : name, "age": age, "email": email, "school": school,}
     console.log(user2);
     return this.http.post(SERVER_URL + '/display', user2);
+  }
+
+  // display
+  getreffs (): any {
+    return this.http.get(SERVER_URL + '/get_user_referrals/' + localStorage.getItem('userLogin'));
   }
 
 

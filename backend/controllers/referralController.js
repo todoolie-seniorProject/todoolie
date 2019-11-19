@@ -24,3 +24,20 @@ exports.createNewReferrals = function(req, res) {
     });
   }
 };
+
+exports.getUserReferrals = function(req, res ){
+  if(!req.params.username) { //if username missing in parameter of api call
+    res.send('No username given in parameters');
+  }
+  else {
+    Task.getUserReferrals(req.params.username, function(err, refs) {
+      if(err) {
+        console.log(err);
+        res.send(err);
+      }
+      else {
+        res.send(refs);
+      }
+    })
+  }
+}

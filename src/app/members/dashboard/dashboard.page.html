@@ -51,12 +51,44 @@
   <!-- <h2 style="text-align:center">Click Here To Make A Referral!</h2> -->
     <div class="btn-wrapper">
       <ion-button id="page-button1" (click)='referout()' color="primary" expand="block">Submit Referral</ion-button>
+      <ion-button id="page-button1" (click)='storeBankInfo()' color="primary" expand="block">Store Bank Info</ion-button>
   
   
       <div class="spacer" style="height:60px;"></div>
+
       <!-- <div class="dashPic">
         <ion-img style="width: 600px; height:300px;" src='../../../assets/img/group.png'></ion-img>
       </div> -->
     
     </div>
+    <ion-card>
+        <ion-card-header >
+            <ion-card-title style="text-align:center">YOUR REFERRALS</ion-card-title>
+          </ion-card-header>
+      <div>
+        <ion-grid>
+          <!-- This is loop which checks all the data in "data" variable which we created in dashboard.page.ts file 
+          This loop goes one by one on each refferal in the data and shows it on dashboard page -->
+          <div *ngFor="let item of data" style="width: 100%; height: 65px; background-color: #0d467b; color: white; padding: 15px; margin: 10px;">
+              <ion-row>
+                <ion-col>
+                  <p>Email: {{item.Email}}</p> <!-- item means current referral in the loop, so show its email here -->
+                </ion-col>
+                <ion-col>
+                  <p *ngIf="item.Status == 0">Status: Pending</p> <!-- So if email status is 0, show pending-->
+                  <p *ngIf="item.Status == 1">Status: Paid</p> <!-- if email status is 1, show paid-->
+                </ion-col>
+
+                <ion-col>
+                  <!-- if referral is unpaid, means status is 0, then make a button to get paid-->
+                    <span *ngIf="item.Status == 0"><ion-button id="page-button1" (click)='getPaid(item.Email);' color="primary" expand="block">Get Paid</ion-button></span>
+                    <p *ngIf="item.Status == 1">You already got paid!</p> <!--  if referral is already paid, dont make button-->
+                </ion-col>
+              </ion-row>
+          </div>
+        </ion-grid>
+
+      </div>
+    </ion-card>
+    
   </ion-content>
