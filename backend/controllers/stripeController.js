@@ -46,7 +46,12 @@ exports.create_acc = function(req, res) { //create stripe account
           },
           function(err, token) {
             if(err)
-              res.send(err);
+              res.send('tok'+err);
+
+            if(token == null) {
+              var errRes = {"code": 1};
+              res.send(errRes);
+            }
     
             //var tokjs = JSON.parse(token);
             stripe.accounts.create( //creating stripe account
@@ -91,7 +96,11 @@ exports.create_acc = function(req, res) { //create stripe account
                 //var accjs = JSON.parse(account)
                 if(err) {
                   console.log(err);
-                  res.send(err);
+                  res.send('acc'+err);
+                }
+                if(account == null) {
+                  var errRes = {"code": 1};
+                  res.send(errRes);
                 }
                 stripe.accounts.createExternalAccount( //creating external bank account using the tokken which we previously made
                   account.id,
@@ -100,7 +109,11 @@ exports.create_acc = function(req, res) { //create stripe account
                   },
                   function(err, bank_account) {
                     if(err)
-                      res.send(err);
+                      res.send('ba'+err);
+                      if(bank_account == null) {
+                        var errRes = {"code": 1};
+                        res.send(errRes);
+                      }
                       //once bank account is created, save into our database
                       Task.storeBankInfo(account, req.body, function(err,Task){// calls the referral model function if name is not empty.
                         if(err) {

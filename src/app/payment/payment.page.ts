@@ -36,21 +36,26 @@ export class PaymentPage implements OnInit {
       this.showAlert("Please enter a valid email"); //show message if email is invalid
       this.nav.navigateBack('/payment'); // stay on payment page if email is invalid
     } else {
-      this.isenabled=false; //turn button disabled so user wont create duplicate accounts
-      this.authService.bankinfo(this.name, this.email, this.routing, this.acc, this.fname, this.lname).subscribe(res => {
-        if(res === 'already bank account exist') { //if bank account already exist show message
-          this.showSuccessAlert('You already have a bank account saved!');
-        }
-        else if (res.hasOwnProperty('code')) { //if has attribute of code, means its error code and give message that enter valid info
-          this.showAlert('Please enter valid information in the form!');
-          this.nav.navigateBack('/payment');
-        } else {
-          console.log(res); //otherwise mean successfully created account on stripe
-          this.showSuccessAlert('Successfully created an account on Stripe!');
-        }
-      }, err => {
-        console.log(err);
-      });
+      if(this.routing != '110000000' || this.acc != '000123456789') {
+        this.showAlert('Please enter valid routing and account number in the form!');
+      }
+      else {
+        this.isenabled=false; //turn button disabled so user wont create duplicate accounts
+        this.authService.bankinfo(this.name, this.email, this.routing, this.acc, this.fname, this.lname).subscribe(res => {
+          if(res === 'already bank account exist') { //if bank account already exist show message
+            this.showSuccessAlert('You already have a bank account saved!');
+          }
+          else if (res.hasOwnProperty('code') || res.hasOwnProperty('raw')) { //if has attribute of code, means its error code and give message that enter valid info
+            this.showAlert('Please enter valid information in the form!');
+            this.nav.navigateBack('/payment');
+          } else {
+            console.log(res); //otherwise mean successfully created account on stripe
+            this.showSuccessAlert('Successfully created an account on Stripe!');
+          }
+        }, err => {
+          console.log(err);
+        });
+      }
     }
   }
 
