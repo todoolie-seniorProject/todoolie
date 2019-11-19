@@ -125,7 +125,7 @@ async sendMail() {
     console.log('email sent!');
     
 }, err => {
-  this.showAlert(err.error.text);
+ // this.showAlert(err.error.text);
 });
 }
 
