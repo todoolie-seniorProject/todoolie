@@ -47,7 +47,7 @@ export class DashboardPage implements OnInit {
   }
 
   async storeBankInfo(){
-    this.authService.checkBankAcc().subscribe(data => { 
+    this.authService.checkBankAcc().subscribe(data => {
       if(data['res'] == 1) { 
         // if bank account already exist, show message that already exist and take it to dashboard
         this.showAlreadyAlert();
@@ -60,7 +60,7 @@ export class DashboardPage implements OnInit {
 
  async showAlreadyAlert() {
   const alert = await this.alertCtrl.create({
-    header: 'Server Message',
+    header: 'Alert',
     message: 'You already have bank info stored!',
     buttons: [ 'OK' ]
   });
@@ -74,7 +74,7 @@ export class DashboardPage implements OnInit {
 
   async showNoBank() {
     const alert = await this.alertCtrl.create({
-      header: 'Server Message',
+      header: 'Alert',
       message: 'You dont have bank info stored!',
       buttons: [ {
         text: 'OK',
@@ -89,7 +89,7 @@ export class DashboardPage implements OnInit {
 
   getPaid(email: string) { //function to call pay_referral api to get paid for that referral with that email
 
-    this.authService.checkBankAcc().subscribe(data => { 
+    this.authService.checkBankAcc().subscribe(data => {
       if(data['res'] != 1) { 
         // if bank account already exist, show message that already exist and take it to dashboard
         this.showNoBank();
