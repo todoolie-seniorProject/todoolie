@@ -6,6 +6,8 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { SERVER_URL } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,12 +22,14 @@ public name: string;
 public email: string;
 public age: number;
 public school: string;
+data: any;
 
   constructor(private authService: AuthenticationService,
       public toastController: ToastController,
       public alertCtrl: AlertController,
       private http: HttpClient,
-      private nav: NavController) {
+      private nav: NavController
+      ,private rout: Router) {
 
    }
   ngOnInit() {
@@ -35,7 +39,8 @@ public school: string;
     this.authService.referout();
   }
   payment() {
-    this.nav.navigateRoot('/admin');
+    this.rout.navigateByUrl('/dashboard');
+    
   }
 
   async checkEmail() {
@@ -53,13 +58,11 @@ public school: string;
       this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
         if (res.hasOwnProperty('code')) {
           this.showAlert("The email already exists with this email! ");
-          this.nav.navigateBack('/referral');
         }
         else{
-        console.log(res); //fariha
-        this.showAlertSuccess(res);
-        this.authService.sendMail(this.name, this.email, this.age, this.school);
-          this.nav.navigateForward('/admin'); //temporary remove
+          console.log(res); //fariha
+          //this.authService.sendMail(this.name, this.email, this.age, this.school);
+          //this.sendMail();
         }
 
       }, err => {
@@ -78,6 +81,21 @@ public school: string;
   // }
 
 
+  async display() {
+    this.nav.navigateRoot('/display');
+    this.http.get(SERVER_URL+ '/display').subscribe(data=>{
+      this.data = data;
+      var myJSON = JSON.stringify(data,null,'\t');
+      console.log( myJSON);
+      for(var i = 0; i<myJSON.length; i++){
+        document.getElementById("json").innerHTML = myJSON;
+      }
+    })
+  }
+
+
+
+
   async showAlert(msg) {
     const alert = await this.alertCtrl.create({
       header: 'Error!',   // show error alert instead of server message
@@ -90,7 +108,13 @@ public school: string;
 async showAlertSuccess(msg){
   const alert = await this.alertCtrl.create({
     header: 'Successful Referral!',
-    buttons: ['OK']
+    buttons: [ {
+      text: 'OK',
+    handler: () => {
+      this.rout.navigateByUrl('/dashboard');
+    }
+  }
+]
   });
   await alert.present();
 }
@@ -99,8 +123,9 @@ async showAlertSuccess(msg){
 async sendMail() {
   this.authService.sendMail(this.name, this.email, this.age, this.school).subscribe(res => {
     console.log('email sent!');
+    
 }, err => {
-  this.showAlert(err.error.text);
+ // this.showAlert(err.error.text);
 });
 }
 

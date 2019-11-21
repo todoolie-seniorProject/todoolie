@@ -7,6 +7,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { environment, SERVER_URL } from '../../environments/environment';
 import {NavController, AlertController} from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 const TOKEN_KEY = 'auth-token';
 @Injectable({
@@ -19,7 +20,8 @@ export class AuthenticationService {
               private plt: Platform,
               private http: HttpClient,
               public alertController: AlertController,
-              private nav: NavController
+              private nav: NavController,
+              private router: Router,
       ) {
     this.plt.ready().then(() => {
       this.checkToken();
@@ -65,6 +67,11 @@ export class AuthenticationService {
    console.log(user);
    return this.http.post(SERVER_URL + '/login', user);
   }
+  getPaid(email:string): any {
+    let user = {"email": email, "referby": localStorage.getItem('userLogin')};
+    console.log(user);
+    return this.http.post(SERVER_URL + '/pay_referral', user);
+   }
 // post request for the referral page.
   refer( name: string, email : string, age: number, school : string): any{
     if(name == undefined || email == null || school == null){
@@ -114,6 +121,21 @@ export class AuthenticationService {
     });
     await alert.present();
   }
+
+  // display
+  display (name : string,  email : string, age : number, school : string): any{
+    let user2 = { "user" : name, "age": age, "email": email, "school": school,}
+    console.log(user2);
+    return this.http.post(SERVER_URL + '/display', user2);
+  }
+
+  // display
+  getreffs (): any {
+    return this.http.get(SERVER_URL + '/get_user_referrals/' + localStorage.getItem('userLogin'));
+  }
+
+
+
 
 // sendMail function that sends post request to server
 sendMail( name: string, email: string, age: number, school: string): any {

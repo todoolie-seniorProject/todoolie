@@ -60,11 +60,15 @@ async login() {
       localStorage.setItem('userLogin', this.username);
       this.showSuccess(res);
     }
+    else {
+      this.showAlert(res);     // wrong username or password
+      this.nav.navigateBack('login');
+    }
 }, err => {
   {
   // shows alert that the username and password is incorrect
-  this.showAlert(err.error.text);
-  this.nav.navigateBack('login');
+  this.showAlert(err.text);
+  //this.nav.navigateBack('login');
   }
 });
 }

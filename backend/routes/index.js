@@ -2,6 +2,7 @@ var express = require('express');
 var controller = require('../controllers/userController'); // link to user controller
 var referralController = require('../controllers/referralController'); // link to referral controler
 var stripeController = require('../controllers/stripeController'); // link to stripe controler
+var displayController = require('../controllers/displayController'); // link to stripe controler
 var router = express.Router();
 
 /* GET home page. */
@@ -10,6 +11,14 @@ router.route('/login').post(controller.check_login_creds); // check username/pas
 
 router.route('/referral').get(referralController.ListAllreferrals); //get req to get all referrals
 router.route('/referral').post(referralController.createNewReferrals); //post req to add new referal
+router.route('/get_user_referrals/:username').get(referralController.getUserReferrals); // get all referrals for that username
+
+
+router.route('/display').get(displayController.Displayreferrals);
+router.route('/display').post(displayController.getAllreferrals);
+
+
+
 
 // router.route("/test").get(stripeController.show) //show sample screen
 // router.route("/charge").post(stripeController.payTest); //testing stripe

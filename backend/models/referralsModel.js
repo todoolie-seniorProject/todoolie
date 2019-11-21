@@ -22,6 +22,21 @@ Task.getAllreferrals = function (result) {
             }
         });   
 };
+
+Task.getUserReferrals = function (username, result) {
+    sql.query("SELECT * from Referral WHERE ReferBy = ?", username, function (err, res) {//sql qurey to request all referrals in the db.
+
+            if(err) {
+                console.log("error: ", err);
+                result(null, err);
+            }
+            else{
+                console.log('tasks : ', res,'\n');  
+                result(null, res);
+            }
+        });   
+};
+
 Task.createReferral = function (body, result) {
     var emailValid = 0;
     sql.query("select * from Referral where Email = ?", body.email, function(err, res) {
@@ -29,11 +44,11 @@ Task.createReferral = function (body, result) {
             console.log("error: ", err); // iff error occurs, show
             result(err, null); 
         }
-        // else {
-        //     if(res.length > 0) {
-        //         emailValid = 1;
-        //     }
-        // }
+        else {
+            if(res.length > 0) {
+                emailValid = 1;
+            }
+        }
     });
 
     if(emailValid == 1) {
@@ -47,7 +62,7 @@ Task.createReferral = function (body, result) {
             
             if(err) {
                 console.log("error: ", err); // iff error occurs, show
-                result(err, null);
+                result(null, err);
             }
             else{
                 console.log(res);
