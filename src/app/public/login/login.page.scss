@@ -1,3 +1,13 @@
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
 .btn-wrapper{
     padding-top: 1em;
     text-align: center;
@@ -9,14 +19,35 @@
 }
 
 
-.loginPic{ max-width: 500px;  width: 50%;  margin: 0 auto; display:block;}
+.loginPic{ max-width: 500px;  width: 100%;  margin: 0 auto; display:block;}
 
 .loginInput{
     --padding-bottom: 100px;
     --padding-top:100px;
 }
 
-// ion-button.page-button1{
+ion-button.page-button1{
     
-//     --background-hover: #f26522;
+    border-radius: 10px !important;
+}
+
+// .something {
+//     color: red !important;
+//     background-color: green !important;
 // }
+
+// ion-input {
+//     background-color: rgba(255, 255, 255, 0.5) !important;
+// 	border: 1px solid #cecece;
+// 	padding-left: 10px;
+//   width: 100px;
+// }
+
+#rounded {
+    
+    width: 100%;
+    height: 45px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 10px;  
+}

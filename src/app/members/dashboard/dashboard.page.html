@@ -50,9 +50,9 @@
     
   <!-- <h2 style="text-align:center">Click Here To Make A Referral!</h2> -->
     <div class="btn-wrapper">
-      <ion-button id="page-button1" (click)='referout()' color="primary" expand="block">Submit Referral</ion-button>
-      <ion-button id="page-button1" (click)='storeBankInfo()' color="primary" expand="block">Store Bank Info</ion-button>
-  
+      <ion-button style="--background: #0b3e6c;" (click)='referout()' color="primary" expand="block">Submit Referral</ion-button>
+      <ion-button style="--background: #0b3e6c;" (click)='storeBankInfo()' color="primary" expand="block">Store Bank Info</ion-button>
+      
   
       <div class="spacer" style="height:60px;"></div>
 
@@ -81,10 +81,11 @@
 
                 <ion-col>
                   <!-- if referral is unpaid, means status is 0, then make a button to get paid-->
-                    <span *ngIf="item.Status == 0"><ion-button id="page-button1" (click)='getPaid(item.Email);' color="primary" expand="block">Get Paid</ion-button></span>
+                    <span *ngIf="item.Status == 0"><ion-button id="page-button1" (click)='getPaid(item.Email);' shape="round" color="tertiary" expand="block">Get Paid</ion-button></span>
                     <p *ngIf="item.Status == 1">You already got paid!</p> <!--  if referral is already paid, dont make button-->
                 </ion-col>
               </ion-row>
+              <div class="spacer" style="height:2px;"></div>
           </div>
         </ion-grid>
 

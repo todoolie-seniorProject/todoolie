@@ -56,9 +56,11 @@ async login() {
   this.authService.login(this.username, this.password).subscribe(res => {
     // randy
     if (res  == true){
-      // this.showAlert(res); //show in alert message box whetever result comes
+      
       localStorage.setItem('userLogin', this.username);
-      this.showSuccess(res);
+      // this.showSuccess(res);
+      // navigate to dashboard after successful login!
+      this.nav.navigateForward('/dashboard');
     }
     else {
       this.showAlert(res);     // wrong username or password

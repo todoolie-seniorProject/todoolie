@@ -61,6 +61,7 @@ data: any;
         }
         else{
           console.log(res); //fariha
+
           //this.authService.sendMail(this.name, this.email, this.age, this.school);
           //this.sendMail();
           this.showAlertSuccess(res);//test
@@ -68,7 +69,8 @@ data: any;
 
       }, err => {
         console.log(err); //
-        this.showAlertSuccess('test');//test
+
+        this.showAlertSuccess('test');
       });
     }
   }
