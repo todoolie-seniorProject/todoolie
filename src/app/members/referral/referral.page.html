@@ -8,7 +8,7 @@
       <div class="spacer" style="height:20px;"></div>
   
       <div class="referPic">
-          <ion-img style="width: 312px; height:161px;" src='../../../assets/img/logo.png'></ion-img>
+        <ion-img style="width: 312px; height:161px; width: 100%;  margin: 0 auto; display:block;" src='../../../assets/img/orangelogo.png'></ion-img>
         </div>
       <!-- <h1 id="page-heading1">
         Welcome to ToDoolie!
@@ -38,11 +38,11 @@
         </ion-item>
         <div class="spacer" style="height:2px;"></div>
         <ion-item>
-            <ion-label>school : </ion-label>
+            <ion-label>School : </ion-label>
             <ion-input type = "text" require placeholder = "school" [(ngModel)]="school"></ion-input>
           </ion-item>
         </ion-list> 
         <div class="spacer" style="height:20px;"></div>
-          <ion-button (click) = 'refer(); sendMail(); payment(); ' expand = "block">Submit</ion-button>
+          <ion-button style="--background: #0b3e6c;" (click) = 'refer(); sendMail(); payment(); ' expand = "block">Submit</ion-button>
           <div class="spacer" style="height:20px;"></div>
   </ion-content>

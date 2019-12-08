@@ -70,9 +70,9 @@ async function sendMail(user, callback) {
     subject: "Wellcome to ToDoolie!!", // Subject line
     html: `<h1>Hi ${user.name}</h1><br>
     <h3>We appreciate your interest in joining our team and look forward to meeting with you!
-       To join our platform, visit us at <a href="https://todoolie.com/studentsignup/">Be A ToDoolie Helper</a> 
-       if you have not registered yet. 
-       Please contact us at (313) 777-8052 for more information. </h3>`
+       If you have not signed up yet and would like to join our platform, visit us at <a href="https://todoolie.com/studentsignup/">Be A ToDoolie Helper</a>. 
+       Following the link, you will be able to create an account with us and become a student helper! If you have any questions
+       please contact us at (313) 777-8052 for more information. </h3>`
   };
 
   // send mail with defined transport object
