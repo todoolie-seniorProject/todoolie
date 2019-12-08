@@ -9,37 +9,40 @@
   <div class="spacer" style="height:20px;"></div>
 
   <div class="loginPic">
-      <ion-img style="width: 312px; height:161px;" src='../../../assets/img/logo.png'></ion-img>
+      <ion-img style="width: 312px; height:161px; width: 100%;  margin: 0 auto; display:block;" src='../../../assets/img/orangelogo.png'></ion-img>
     </div>
   <div id="page-markdown2" style="text-align:center;">
-  <!-- <h1 id="page-heading1" style=" color: #f26522; text-align:center;">
-    Welcome to ToDoolie!
-  </h1> -->
+
 
   </div>
   <div class="spacer" style="height:40px;"></div>
 
   
-    <ion-item >
+    <!-- <ion-item style="
+    --border-radius: 8px" > -->
+    <ion-item id="rounded">
       <ion-input  type="text" pattern="^[a-zA-Z\s']+$" required placeholder="Username" [(ngModel)]="username">
       </ion-input>
     </ion-item>
 
-    <div class="spacer" style="height:2px;"></div>
+    <div class="spacer" style="height:4px;"></div>
 
-    <ion-item>
+    <ion-item id="rounded" >
       <ion-input type="password" required placeholder="Password" [(ngModel)]="password"></ion-input>
     </ion-item>
+    <div class="spacer" style="height:8px;"></div>
+    <ion-button style="--background: #0b3e6c;" shape="round" (click)='login()' expand="block">Login</ion-button>
   
 
   <div class="btn-wrapper">
-    <ion-button class="page-button1" (click)='login()' color="primary" expand="block">Login</ion-button>
+    <!-- <ion-button style="--background: #0b3e6c;" shape="round" (click)='login()' expand="block">Login</ion-button> -->
 
 
     <div class="spacer" style="height:60px;"></div>
     <div class="loginPic">
-      <ion-img style="width: 312px; height:161px;" src='../../../assets/img/login2.jpg'></ion-img>
+      <ion-img style="width:100%; margin: 0 auto; display:block; opacity: 0.9;" src='../../../assets/img/girl.jpg'></ion-img>
     </div>
+    <div class="spacer" style="height:60px;"></div>
   
   </div>
 </ion-content>
