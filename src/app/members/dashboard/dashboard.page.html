@@ -75,6 +75,9 @@
                   <p>Email: {{item.Email}}</p> <!-- item means current referral in the loop, so show its email here -->
                 </ion-col>
                 <ion-col>
+                  <p>Date Created: {{item.dateCreated}}</p>
+                </ion-col>
+                <ion-col>
                   <p *ngIf="item.Status == 0">Status: Pending</p> <!-- So if email status is 0, show pending-->
                   <p *ngIf="item.Status == 1">Status: Paid</p> <!-- if email status is 1, show paid-->
                 </ion-col>
