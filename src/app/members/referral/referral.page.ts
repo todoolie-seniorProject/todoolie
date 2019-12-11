@@ -30,6 +30,7 @@ data: any;
       private http: HttpClient,
       private nav: NavController
       ,private rout: Router) {
+        this.clear();
 
    }
   ngOnInit() {
@@ -39,7 +40,7 @@ data: any;
     this.authService.referout();
   }
   payment() {
-    //this.rout.navigateByUrl('/dashboard');
+    this.rout.navigateByUrl('/dashboard');
     
   }
 
@@ -52,7 +53,7 @@ data: any;
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(!re.test(this.email)) { //testing the email on the above regex
       this.showAlert("Please enter a valid email"); //show message if email is invalid
-      //this.nav.navigateBack('/referral'); // stay on referral page if email is invalid
+      this.nav.navigateBack('/referral'); // stay on referral page if email is invalid
     }
     else { // if email is valid then this will run
       this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
@@ -61,16 +62,13 @@ data: any;
         }
         else{
           console.log(res); //fariha
-
-          //this.authService.sendMail(this.name, this.email, this.age, this.school);
-          //this.sendMail();
-          this.showAlertSuccess(res);//test
+          
         }
 
       }, err => {
         console.log(err); //
-
         this.showAlertSuccess('test');
+        this.clear();
       });
     }
   }
