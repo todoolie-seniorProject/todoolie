@@ -30,6 +30,7 @@ data: any;
       private http: HttpClient,
       private nav: NavController
       ,private rout: Router) {
+        this.clear();
 
    }
   ngOnInit() {
@@ -67,6 +68,7 @@ data: any;
       }, err => {
         console.log(err); //
         this.showAlertSuccess('test');
+        this.clear();
       });
     }
   }
