@@ -40,7 +40,7 @@ export class DashboardPage implements OnInit {
     });
     
   }
-
+//button at the top of the page that logs the user out of the app and back to the login page.
   logout() {
     this.authService.logout();
   }
@@ -59,7 +59,7 @@ export class DashboardPage implements OnInit {
       }
    });
  }
-
+//alert that pops up when information is already stored and users tries to use the button.
  async showAlreadyAlert() {
   const alert = await this.alertCtrl.create({
     header: 'Alert',
