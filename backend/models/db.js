@@ -3,7 +3,7 @@ const mysql = require('mysql'); //defining mysql library, here we defined mysql 
 const db= mysql.createConnection({ // create this database on ur localhost
     host: 'localhost', // we typed this syntax to connect to our mysql database
     user:'root', // this is the username of connection
-    password: '12345', //password for connection
+    password: 'password', //password for connection
     databse: 'todoolie_db' //the name of database with which we will be communicating
   });
 

@@ -32,13 +32,14 @@ export class DashboardPage implements OnInit {
 
      }
   ngOnInit() {
+    //this ngOnit function gets the referrals specific to each username.
     this.http.get(SERVER_URL + '/get_user_referrals/' + localStorage.getItem('userLogin')).subscribe(data=>{
       this.data = data;
       console.log(this.data);
     });
     
   }
-
+//button at the top of the page that logs the user out of the app and back to the login page.
   logout() {
     this.authService.logout();
   }
@@ -57,7 +58,7 @@ export class DashboardPage implements OnInit {
       }
    });
  }
-
+//alert that pops up when information is already stored and users tries to use the button.
  async showAlreadyAlert() {
   const alert = await this.alertCtrl.create({
     header: 'Alert',

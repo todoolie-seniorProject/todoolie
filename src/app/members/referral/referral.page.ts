@@ -47,7 +47,7 @@ data: any;
   async checkEmail() {
     
   }
-
+// 
   async refer() {
     // the regex that checks the input email if its in format and is a valid email
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -97,7 +97,7 @@ data: any;
 
 
 
-
+//show alert 
   async showAlert(msg) {
     const alert = await this.alertCtrl.create({
       header: 'Error!',   // show error alert instead of server message
@@ -107,6 +107,7 @@ data: any;
     await alert.present();
 
 }
+//show alert once referral is successful.
 async showAlertSuccess(msg){
   const alert = await this.alertCtrl.create({
     header: 'Successful Referral!',

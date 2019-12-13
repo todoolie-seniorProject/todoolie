@@ -34,7 +34,7 @@ Task.getAllreferrals = function(result){
     });
 };
 
-
+//api thats deletes users
 Task.getUserReferral = function(body,result){
     sql.query("DELETE FROM Referral WHERE refername = ?", body.name, function(err,res){
         if(err){

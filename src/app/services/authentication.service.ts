@@ -113,6 +113,7 @@ export class AuthenticationService {
     });
     await alert.present();
   }
+  //alert if the referral is submitted with empty data points.
   async blankReferral() {
     const alert = await this.alertController.create({
       header: 'Empty data',
@@ -122,7 +123,7 @@ export class AuthenticationService {
     await alert.present();
   }
 
-  // display
+  // post request for the display page
   display (name : string,  email : string, age : number, school : string): any{
     let user2 = { "user" : name, "age": age, "email": email, "school": school,}
     console.log(user2);
