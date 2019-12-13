@@ -23,9 +23,9 @@ export class AuthenticationService {
               private nav: NavController,
               private router: Router,
       ) {
-    this.plt.ready().then(() => {
-      this.checkToken();
-    });
+    // this.plt.ready().then(() => {
+    //   this.checkToken();
+    // });
   }
 
   checkBankAcc() { //call api to check account if already exist
@@ -46,21 +46,10 @@ export class AuthenticationService {
       console.log(user);
       return this.http.post(SERVER_URL+'/register_bank', user);
     }
-  } 
+  }
 
-  checkToken() {
-    this.storage.get(TOKEN_KEY).then(res => {
-      if (res) {
-        this.authenticationState.next(true);
-      }
-    });
-  }
-  setToken() {
-   return this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
-     this.authenticationState.next(true);
-     let isAthorized = this.authenticationState.getValue();
-   });
-  }
+
+ 
   // post request for the login page.
   login(username: string, password: string): any {
    let user = {"username": username, "pass": password} 

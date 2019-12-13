@@ -37,6 +37,7 @@ Task.getUserReferrals = function (username, result) {
         });   
 };
 
+
 Task.createReferral = function (body, result) {
     var emailValid = 0;
     sql.query("select * from Referral where Email = ?", body.email, function(err, res) {

@@ -7,6 +7,7 @@ var Task = function(task){
     this.created_at = new Date();
 };
 
+// this gets all students from data base and sends response back to front end
 Task.getAllUsers = function (result) {
     sql.query("SELECT * from Users", function (err, res) {
 
@@ -21,6 +22,7 @@ Task.getAllUsers = function (result) {
         });   
 };
 
+// check username and password from the database and sends the response back to front end
 Task.checkUser = function (body, result) {    
     sql.query("SELECT * from Users WHERE Username = ? AND Password = ?", [body.username, body.pass], function (err, res) {
             

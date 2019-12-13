@@ -6,20 +6,6 @@ var Task = function(task){
     this.created_at = new Date();
 };
 
-// Task.getAllreferrals = function(result){
-//     sql.query("SELECT * from Referral ", function(err,res){
-        
-//         if(err){
-//             console.log("errror: ", err);
-//             result(null,err);
-//         }
-//         else{
-//             console.log('tasks : ', res);
-//             result(null,res);
-//         }
-//     });
-// };
-// api that gets all referrals specific to each user.
 Task.getAllreferrals = function(result){
     sql.query("SELECT referby, refername, age, email, school FROM Referral WHERE referby = 'test' ", function(err,res){
         

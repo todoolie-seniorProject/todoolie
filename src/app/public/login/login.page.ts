@@ -42,23 +42,17 @@ export class LoginPage implements OnInit {
      };
      this.router.navigate(['referral'], navigationExtras);
       }
-    // setUsername(username){
-    //   this.username = username;
-    // }
-    // getUsername(){
-    //   return this.username;
-    // }
+
     ngOnInit() {
-      // this.authService.currentMessage.subscribe(this.username => this.username =username);
+      
      }
 
 async login() {
   this.authService.login(this.username, this.password).subscribe(res => {
-    // randy
+    // if the username and password credentials are true, user is authenticated
     if (res  == true){
       
       localStorage.setItem('userLogin', this.username);
-      // this.showSuccess(res);
       // navigate to dashboard after successful login!
       this.nav.navigateForward('/dashboard');
     }
@@ -75,7 +69,7 @@ async login() {
 });
 }
 
-
+// success alert, it then navigates to the dashboard
 async showSuccess(msg){
   const alert = await this.alertCtrl.create({
     header: 'Successful Login!',
@@ -91,6 +85,7 @@ async showSuccess(msg){
   });
   await alert.present();
 }
+// this alert shows an error of wrong credentials
  async showAlert(msg) {
     const alert = await this.alertCtrl.create({
       header: 'Error!',
@@ -102,8 +97,6 @@ async showSuccess(msg){
 }
 
 }
-// ngOnDestroy() {
-//   this.loginSub.unsubscribe();
-// }
+
 
 

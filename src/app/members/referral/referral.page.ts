@@ -36,17 +36,12 @@ data: any;
   ngOnInit() {
 
   }
-  referout() {
-    this.authService.referout();
-  }
+
   payment() {
     this.rout.navigateByUrl('/dashboard');
     
   }
 
-  async checkEmail() {
-    
-  }
 
   async refer() {
     // the regex that checks the input email if its in format and is a valid email
@@ -65,36 +60,13 @@ data: any;
           
         }
 
-      }, err => {
+      }, err => { // show error
         console.log(err); //
         this.showAlertSuccess('test');
         this.clear();
       });
     }
   }
-
-  // async refer() {
-  //   this.authService.refer(this.name, this.email, this.age, this.school).subscribe(res => {
-  //     this.showAlertSuccess(res);
-  //     this.authService.sendMail(this.name, this.email, this.age, this.school);
-  // }, err => {
-  //   this.showAlert(err.error.text);
-  // });
-  // }
-
-
-  async display() {
-    this.nav.navigateRoot('/display');
-    this.http.get(SERVER_URL+ '/display').subscribe(data=>{
-      this.data = data;
-      var myJSON = JSON.stringify(data,null,'\t');
-      console.log( myJSON);
-      for(var i = 0; i<myJSON.length; i++){
-        document.getElementById("json").innerHTML = myJSON;
-      }
-    })
-  }
-
 
 
 
@@ -121,7 +93,7 @@ async showAlertSuccess(msg){
   await alert.present();
 }
 
-// sendmail function for referral
+// sendmail function after a  referral has been sent
 async sendMail() {
   this.authService.sendMail(this.name, this.email, this.age, this.school).subscribe(res => {
     console.log('email sent!');
@@ -133,7 +105,7 @@ async sendMail() {
 
 
 
-
+// clear function that clears contents once a user has input a referral
 clear() {
   this.name = '';
   this.email = '';

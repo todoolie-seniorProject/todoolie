@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class DashboardPage implements OnInit {
 
   // this data will have all referrals stored, obtained from our api get_user_referrals
-  public data: any; //monowar syntax
+  public data: any; 
 
   constructor(private authService: AuthenticationService,private storage: Storage,
     private http: HttpClient,
@@ -32,7 +32,9 @@ export class DashboardPage implements OnInit {
 
      }
   ngOnInit() {
-    this.http.get(SERVER_URL + '/get_user_referrals/' + localStorage.getItem('userLogin')).subscribe(data=>{
+    
+    // this gets user referrals and the user login information
+    this.http.get(SERVER_URL + '/get_user_referrals/' + localStorage.getItem('userLogin')).subscribe(data => {
       this.data = data;
       console.log(this.data);
     });
